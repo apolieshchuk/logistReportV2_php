@@ -28,6 +28,7 @@ class AutoSeeder extends Seeder
                     'dr_name' => $auto['dr_name'],
                     'dr_fath' => $auto['dr_fath'],
                     'tel'=> $auto['tel'],
+                    'notes'=> $auto['notes'],
                 ]
             );
         }

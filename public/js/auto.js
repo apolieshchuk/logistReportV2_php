@@ -1,28 +1,41 @@
-const NUM_OF_COLUMNS = 9;
+const NUM_OF_COLUMNS = 10; // and id as last col
 
-// checked checkboxes copy
+// Copy selected rows
 $('#copyButton').click(function () {
-    let table = $('#autoTable').DataTable();
 
-    let data = table.rows( { selected: true }).data();
+    let autos = getSelectedRows();
+    if (autos.length === 0) return;
 
-    let autos = [];
-    for (let row = 0; row < data.length; row++){
-        let auto = [];
-        auto.push(row + 1 + ")"); // #
-        for (let col = 1; col < NUM_OF_COLUMNS + 1; col++) {
-            auto.push(data[row][col]);
-        }
-        // auto.push("\n"); // \n
-        autos.push(auto);
-    }
-    // console.log(autos);
+    // we don't need id row
+    autos.forEach( (auto) => {
+        auto.pop();
+    });
 
     // replace in readable format
     const find = ',';
     const re = new RegExp(find, 'g');
+
+    // copy to clipbord
     copyToClipboard(autos.join("\n").replace(re,' '));
 })
+
+function getSelectedRows() {
+    let table = $('#autoTable').DataTable();
+    // objects
+    let data = table.rows( { selected: true }).data();
+
+    // move from objects to array
+    let autos = [];
+    for (let row = 0; row < data.length; row++){
+        let auto = [];
+        auto.push(row + 1 + ")");
+        for (let col = 1; col < NUM_OF_COLUMNS + 1; col++) {
+            auto.push(data[row][col]);
+        }
+        autos.push(auto);
+    }
+    return autos;
+}
 
 function copyToClipboard(text) {
     const el = document.createElement('textarea');
@@ -35,23 +48,39 @@ function copyToClipboard(text) {
 
 // clear checked
 $('#clearButton').click(function () {
-    // clear storage
-    // sessionStorage.removeItem('autos');
-
     // uncheked all
     $('#autoTable').DataTable().rows().deselect();
-    // console.log(table.rows().deselect());
-    // table.columns().checkboxes.deselect(true);
-    // $('[id^=checkBox_]:checkbox:checked').prop('checked', false);
 })
 
+// Go authos, GO!
+$('#goButton').click(function () {
+    const autos = getSelectedRows()
+    if (autos.length === 0) {
+        alert('Не вибрані авто для відправлення на маршрут')
+    }
+
+    // get selected id's
+    const ids = autos.map( (auto) => {
+       return auto.pop();
+    });
+
+    //save auto id's data in storage and redirect to another route
+    $.ajax({
+        type: "POST",
+        url: "/go",
+        data: JSON.stringify(ids),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+        }
+    });
+})
 
 // data-tables functions
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#autoTable tfoot th').each( function () {
+    $('#autoTable thead tr:eq(1) th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
     } );
 
     // DataTable
@@ -64,9 +93,12 @@ $(document).ready(function() {
         } ],
         select: {
             style:    'multi',
-            selector: 'td:first-child'
+            // selector: 'td:first-child'
         },
-        order: [[ 1, 'asc' ]]
+        order: [[ 1, 'asc' ]],
+        orderCellsTop: true,
+        fixedHeader: true,
+        pageLength: 10
     });
 
     // Apply the search
@@ -81,37 +113,23 @@ $(document).ready(function() {
             }
         } );
     } );
+
+    // move filter box outside table
+    $("#filterbox").keyup(function() {
+        table.search(this.value).draw();
+    });
+
+    // filters under columns
+    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
+        table
+            .column( $(this).parent().index() )
+            .search( this.value )
+            .draw();
+    } );
 } )
 
 // For fast table load
 window.onload = function() {
-    // clear storage
-    // sessionStorage.removeItem('autos');
-
     // change autoTable vision
     document.getElementById("autoTable").style.display = 'block';
 };
-
-
-// copy to session storage clicked checkboxes
-// $('[id^=checkBox_]').click(function () {
-//     // console.log(document.getElementById("myCheck").checked);
-//     // get checked array from session
-//     let checkedAutos = JSON.parse(sessionStorage.getItem("autos")) || [];
-//     // get clicked item id
-//     let id = $(this).attr("id").split('_')[1];
-//
-//     // if box is checked
-//     if ($(this).is(':checked')){
-//         // and not exists in session storage
-//         if (!checkedAutos.includes(id)) {
-//             checkedAutos.push(id);
-//         }
-//     } else { // if uncheked
-//         const idForRemove = checkedAutos.indexOf(id);
-//         if (idForRemove !== -1) checkedAutos.splice(idForRemove, 1);
-//     }
-//
-//     window.sessionStorage.setItem("autos", JSON.stringify(checkedAutos));
-//     console.log(JSON.parse(sessionStorage.getItem("autos")));
-// })

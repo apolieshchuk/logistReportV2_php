@@ -4,6 +4,10 @@ tfoot input {
     box-sizing: border-box;
 }
 
+table {
+    width: 100%;
+}
+
 .button {
     position: relative;
     background-color: #3399FF;
@@ -23,7 +27,7 @@ tfoot input {
 
 .button:after {
     content: "";
-    background: #90EE90;
+    background: #66CCCC;
     display: block;
     position: absolute;
     padding-top: 300%;
@@ -44,6 +48,45 @@ tfoot input {
 header {
     text-align: center;
 }
+
+tbody tr:hover{
+    cursor: pointer;
+}
+
+/* Column size */
+th:first-child, th:first-child input {
+    width: 5px;
+}
+
+th:nth-child(2), th:nth-child(2) input {
+    width: 180px;
+}
+
+th:nth-child(3), th:nth-child(3) input {
+    width: 30px;
+}
+
+th:nth-child(4), th:nth-child(4) input,
+th:nth-child(5), th:nth-child(5) input,
+th:nth-child(6), th:nth-child(6) input,
+th:nth-child(7), th:nth-child(7) input {
+    width: 110px;
+}
+
+th:nth-child(8), th:nth-child(8) input,
+th:nth-child(9), th:nth-child(9) input {
+    width: 130px;
+}
+
+table.dataTable thead th {
+    padding: 5px 9px;
+}
+
+#autoTable_filter{
+    height: 25px;
+    display: none;
+}
+
 /* CSS Created by CSS CHECKBOX */
 /**********************************/
 /**** www.CSScheckbox.com *********/

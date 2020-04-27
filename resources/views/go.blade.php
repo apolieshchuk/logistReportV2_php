@@ -2,9 +2,8 @@
 
 @section('head')
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="/css/auto.css">
+<link rel="stylesheet" href="/css/go.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
-<meta name="csrf_token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('body')
@@ -91,7 +90,7 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="/js/auto.js"></script>
+<script src="/js/go.js"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 @endsection
