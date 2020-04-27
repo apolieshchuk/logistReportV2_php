@@ -53,10 +53,10 @@ $(document).ready(function() {
         var title = $(this).text();
         $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
     } );
-    // $('#autoTable tfoot th').each( function () {
-    //     var title = $(this).text();
-    //     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
-    // } );
+
+    $('#autoTable tbody').on( 'click', 'tr', function () {
+        $(this).toggleClass('selected');
+    } );
 
     // DataTable
     const table = $('#autoTable').DataTable({
