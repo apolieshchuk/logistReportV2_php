@@ -1,12 +1,50 @@
+const NUM_OF_COLUMNS = 9;
+
 // checked checkboxes copy
 $('#copyButton').click(function () {
-    let checkedAutos = [];
-    $('[id^=checkBox_]:checkbox:checked').each(function () {
-        let id = $(this).attr("id").split('_')[1];
-        checkedAutos.push(id);
-    })
-    console.log(checkedAutos);
+    let table = $('#autoTable').DataTable();
+
+    let data = table.rows( { selected: true }).data();
+
+    let autos = [];
+    for (let row = 0; row < data.length; row++){
+        let auto = [];
+        auto.push(row + 1 + ")"); // #
+        for (let col = 1; col < NUM_OF_COLUMNS + 1; col++) {
+            auto.push(data[row][col]);
+        }
+        // auto.push("\n"); // \n
+        autos.push(auto);
+    }
+    // console.log(autos);
+
+    // replace in readable format
+    const find = ',';
+    const re = new RegExp(find, 'g');
+    copyToClipboard(autos.join("\n").replace(re,' '));
 })
+
+function copyToClipboard(text) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+}
+
+// clear checked
+$('#clearButton').click(function () {
+    // clear storage
+    // sessionStorage.removeItem('autos');
+
+    // uncheked all
+    $('#autoTable').DataTable().rows().deselect();
+    // console.log(table.rows().deselect());
+    // table.columns().checkboxes.deselect(true);
+    // $('[id^=checkBox_]:checkbox:checked').prop('checked', false);
+})
+
 
 // data-tables functions
 $(document).ready(function() {
@@ -17,8 +55,18 @@ $(document).ready(function() {
     } );
 
     // DataTable
-    var table = $('#autoTable').DataTable({
+    const table = $('#autoTable').DataTable({
         "bAutoWidth": false,
+        columnDefs: [ {
+            orderable: false,
+            className: 'select-checkbox',
+            targets:   0
+        } ],
+        select: {
+            style:    'multi',
+            selector: 'td:first-child'
+        },
+        order: [[ 1, 'asc' ]]
     });
 
     // Apply the search
@@ -37,5 +85,33 @@ $(document).ready(function() {
 
 // For fast table load
 window.onload = function() {
+    // clear storage
+    // sessionStorage.removeItem('autos');
+
+    // change autoTable vision
     document.getElementById("autoTable").style.display = 'block';
 };
+
+
+// copy to session storage clicked checkboxes
+// $('[id^=checkBox_]').click(function () {
+//     // console.log(document.getElementById("myCheck").checked);
+//     // get checked array from session
+//     let checkedAutos = JSON.parse(sessionStorage.getItem("autos")) || [];
+//     // get clicked item id
+//     let id = $(this).attr("id").split('_')[1];
+//
+//     // if box is checked
+//     if ($(this).is(':checked')){
+//         // and not exists in session storage
+//         if (!checkedAutos.includes(id)) {
+//             checkedAutos.push(id);
+//         }
+//     } else { // if uncheked
+//         const idForRemove = checkedAutos.indexOf(id);
+//         if (idForRemove !== -1) checkedAutos.splice(idForRemove, 1);
+//     }
+//
+//     window.sessionStorage.setItem("autos", JSON.stringify(checkedAutos));
+//     console.log(JSON.parse(sessionStorage.getItem("autos")));
+// })
