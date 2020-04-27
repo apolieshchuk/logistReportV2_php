@@ -1,0 +1,80 @@
+tfoot input {
+    width: 100%;
+    padding: 3px;
+    box-sizing: border-box;
+}
+
+.button {
+    position: relative;
+    background-color: #3399FF;
+    border: none;
+    font-size: 18px;
+    color: #FFFFFF;
+    padding: 5px;
+    width: 120px;
+    height: 30px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+header {
+    text-align: center;
+}
+/* CSS Created by CSS CHECKBOX */
+/**********************************/
+/**** www.CSScheckbox.com *********/
+
+/*general styles for all CSS Checkboxes*/
+input[type=checkbox].css-checkbox {
+    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
+
+input[type=checkbox].css-checkbox + label.css-label {
+    padding-left:30px;
+    height:25px;
+    display:inline-block;
+    line-height:25px;
+    background-repeat:no-repeat;
+    background-position: 0 0;
+    font-size:25px;
+    vertical-align:middle;
+    cursor:pointer;
+
+}
+
+input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -25px;
+}
+label.css-label {
+    background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
