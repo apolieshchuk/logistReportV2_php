@@ -9,7 +9,7 @@ class AutoController extends Controller
 {
     public function index() {
         return view('auto', [
-            'autos' => Auto::orderBy('carrier_id', 'asc')->get(),
+            'autos' => Auto::orderBy('name', 'asc')->get(),
         ]);
     }
 

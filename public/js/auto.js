@@ -49,10 +49,14 @@ $('#clearButton').click(function () {
 // data-tables functions
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#autoTable tfoot th').each( function () {
+    $('#autoTable thead tr:eq(1) th').each( function () {
         var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
     } );
+    // $('#autoTable tfoot th').each( function () {
+    //     var title = $(this).text();
+    //     $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+    // } );
 
     // DataTable
     const table = $('#autoTable').DataTable({
@@ -66,7 +70,10 @@ $(document).ready(function() {
             style:    'multi',
             selector: 'td:first-child'
         },
-        order: [[ 1, 'asc' ]]
+        order: [[ 1, 'asc' ]],
+        orderCellsTop: true,
+        fixedHeader: true,
+        pageLength: 10
     });
 
     // Apply the search
@@ -81,6 +88,14 @@ $(document).ready(function() {
             }
         } );
     } );
+
+    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
+
+        table
+            .column( $(this).parent().index() )
+            .search( this.value )
+            .draw();
+    } );
 } )
 
 // For fast table load
@@ -90,6 +105,8 @@ window.onload = function() {
 
     // change autoTable vision
     document.getElementById("autoTable").style.display = 'block';
+    $wnd.$(".dataTables_scrollFoot").detach().insertBefore($wnd.$('.dataTables_scrollHead'));
+
 };
 
 

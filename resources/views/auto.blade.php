@@ -14,19 +14,45 @@
     <table id="autoTable" class="display" style="width:100%;
      table-layout: fixed; display: none">
         <thead>
-        <tr>
-            <th style="width: 5px"></th>
-            <th style="width: 180px">Назва</th>
-            <th style="width: 80px">Марка</th>
-            <th style="width: 110px">№авт</th>
-            <th style="width: 110px">№прич</th>
-            <th style="width: 110px">Прiзвище</th>
-            <th style="width: 110px">Iмя</th>
-            <th style="width: 130px">По-батьк</th>
-            <th style="width: 130px">Тел</th>
-            <th>Замiтки</th>
-        </tr>
+            <tr>
+                <th style="width: 5px"></th>
+                <th style="width: 180px">Назва</th>
+                <th style="width: 30px">Марка</th>
+                <th style="width: 110px">№авт</th>
+                <th style="width: 110px">№прич</th>
+                <th style="width: 110px">Прiзвище</th>
+                <th style="width: 110px">Iмя</th>
+                <th style="width: 130px">По-батьк</th>
+                <th style="width: 130px">Тел</th>
+                <th>Замiтки</th>
+            </tr>
+            <tr>
+                <th style="width: 5px"></th>
+                <th style="width: 180px">Назва</th>
+                <th style="width: 30px">Марка</th>
+                <th style="width: 110px">№авт</th>
+                <th style="width: 110px">№прич</th>
+                <th style="width: 110px">Прiзвище</th>
+                <th style="width: 110px">Iмя</th>
+                <th style="width: 130px">По-батьк</th>
+                <th style="width: 130px">Тел</th>
+                <th>Замiтки</th>
+            </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th style="width: 5px"></th>
+                <th style="width: 180px">Назва</th>
+                <th style="width: 30px">Марка</th>
+                <th style="width: 110px">№авт</th>
+                <th style="width: 110px">№прич</th>
+                <th style="width: 110px">Прiзвище</th>
+                <th style="width: 110px">Iмя</th>
+                <th style="width: 130px">По-батьк</th>
+                <th style="width: 130px">Тел</th>
+                <th>Замiтки</th>
+            </tr>
+        </tfoot>
         <tbody>
         @foreach($autos as $auto)
             <tr>
@@ -34,7 +60,7 @@
 {{--                    <input class="css-checkbox" id="checkBox_{{ $auto['id'] }}" type="checkbox">--}}
 {{--                    <label for="checkBox_{{ $auto['id'] }}" class="css-label lite-blue-check"></label>--}}
                 </td>
-                <td>{{ $auto->carrier['name'] }}</td>
+                <td>{{ $auto['name'] }}</td>
                 <td>{{ $auto['mark'] }}</td>
                 <td>{{ $auto['auto_num'] }}</td>
                 <td>{{ $auto['trail_num'] }}</td>
@@ -46,19 +72,7 @@
             </tr>
         @endforeach
         </tbody>
-        <tfoot>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-        </tr>
+
     </table>
 @endsection
 
