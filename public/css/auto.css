@@ -8,6 +8,15 @@ table {
     width: 100%;
 }
 
+table th input {
+    /*border-radius: 5px;*/
+    /*outline: none;*/
+}
+
+body {
+    /*background-color: #c4d3f6;*/
+}
+
 .button {
     position: relative;
     background-color: #3399FF;

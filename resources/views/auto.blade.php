@@ -22,41 +22,52 @@
 
     <table id="autoTable" class="display" style="width:100%; display: none;">
         <thead>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-            <th style="display: none">id</th>
-        </tr>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-            <th style="display: none">id</th>
-        </tr>
-
+            <tr>
+                <th></th>
+                <th>Назва</th>
+                <th>Марка</th>
+                <th>№авт</th>
+                <th>№прич</th>
+                <th>Прiзвище</th>
+                <th>Iмя</th>
+                <th>По-батьк</th>
+                <th>Тел</th>
+                <th>Замiтки</th>
+                <th style="display: none">id</th>
+            </tr>
+            <tr>
+                <th></th>
+                <th>Назва</th>
+                <th>Марка</th>
+                <th>№авт</th>
+                <th>№прич</th>
+                <th>Прiзвище</th>
+                <th>Iмя</th>
+                <th>По-батьк</th>
+                <th>Тел</th>
+                <th>Замiтки</th>
+                <th style="display: none">id</th>
+            </tr>
         </thead>
+        <tfoot>
+            <tr>
+                <th></th>
+                <th>Назва</th>
+                <th>Марка</th>
+                <th>№авт</th>
+                <th>№прич</th>
+                <th>Прiзвище</th>
+                <th>Iмя</th>
+                <th>По-батьк</th>
+                <th>Тел</th>
+                <th>Замiтки</th>
+                <th style="display: none">id</th>
+            </tr>
+        </tfoot>
         <tbody>
         @foreach($autos as $auto)
             <tr>
-                <td>
-                    {{--                    <input class="css-checkbox" id="checkBox_{{ $auto['id'] }}" type="checkbox">--}}
-                    {{--                    <label for="checkBox_{{ $auto['id'] }}" class="css-label lite-blue-check"></label>--}}
-                </td>
+                <td></td>
                 <td>{{ $auto->carrier['name'] }}</td>
                 <td>{{ $auto['mark'] }}</td>
                 <td>{{ $auto['auto_num'] }}</td>
@@ -70,19 +81,6 @@
             </tr>
         @endforeach
         </tbody>
-        <tfoot>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-        </tr>
     </table>
 
 {{--    <div class="table-wrapper" style="overflow: auto; display: flex">--}}

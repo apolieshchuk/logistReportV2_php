@@ -1,0 +1,44 @@
+body{
+    padding: 20px;
+}
+
+/*table th {*/
+/*    width: auto !important;*/
+/*}*/
+
+/*!*#*!*/
+/*tr th:first-child {*/
+/*    width: 1%;*/
+/*}*/
+
+/*!*Carrier*!*/
+/*tr th:nth-child(2), tr td:nth-child(1) {*/
+/*    width: 20%;*/
+/*}*/
+
+/*!*autonum/trailnum*!*/
+/*tr th:nth-child(3), tr td:nth-child(2),*/
+/*tr th:nth-child(4), tr td:nth-child(3){*/
+/*    width: 10%;*/
+/*}*/
+
+/*!*driver*!*/
+/*tr th:nth-child(5), tr td:nth-child(4){*/
+/*    width: 10%;*/
+/*}*/
+
+/*!*data*!*/
+/*tr th:nth-child(6), tr td:nth-child(5) {*/
+/*    width: 8%;*/
+/*}*/
+
+/*!*f1, f2, tr*!*/
+/*tr th:nth-child(7), tr td:nth-child(6),*/
+/*tr th:nth-child(8), tr td:nth-child(7),*/
+/*tr th:nth-child(9), tr td:nth-child(8)*/
+/*{*/
+/*    width: 6%;*/
+/*}*/
+
+
+

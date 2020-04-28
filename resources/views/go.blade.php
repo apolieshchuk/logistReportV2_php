@@ -1,97 +1,93 @@
 @extends('layout')
 
 @section('head')
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+<title>Table V01</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{--MY CSS--}}
 <link rel="stylesheet" href="/css/go.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
+{{--BOOTSTRAP--}}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{{--BOOTSTRAP-SELECT--}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+{{--SEMANTIC--}}
+{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>--}}
 @endsection
 
 @section('body')
-    <header style="margin-bottom: 10px">
-        <button class="button" id="clearButton">Очистити</button>
-        <button class="button" id="copyButton">Копіювати</button>
-        <button class="button" id="goButton">Відправити</button>
-    </header>
 
-    <nav style="margin-bottom: 10px;" class="navbar navbar-default" role="navigation">
-        <div style="text-align: center" class="navbar-text">
-            <span style="font-size: 25px">Пошук:</span> <input style="height: 25px" type="text" id="filterbox">
-        </div>
-    </nav>
+{{--SELECT PICKER--}}
+<div style="text-align: center">
+    <label for="selectpicker"> Маршрут </label>
+    <select class="selectpicker">
+        <option value="">State</option>
+        <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
+        <option data-tokens="mustard">Burger, Shake and a Smile</option>
+        <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+    </select>
+</div>
 
-    <table id="autoTable" class="display" style="width:100%; display: none;">
-        <thead>
+<hr>
+
+{{--MAIN TABLE--}}
+
+<table class="table table-striped" style="width: 80%; margin: auto;
+ table-layout: fixed">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Перевізник</th>
+        <th scope="col">Авто</th>
+        <th scope="col">Причеп</th>
+        <th scope="col">Водій</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Ф1</th>
+        <th scope="col">Ф2</th>
+        <th scope="col">Тр</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach($autos as $key => $auto)
         <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-            <th style="display: none">id</th>
+            <th scope="row">{{ $key + 1 }}</th>
+            <td> {{ $auto->carrier['name'] }}</td>
+            <td> {{ $auto['auto_num'] }}</td>
+            <td> {{ $auto['trail_num'] }}</td>
+            <td> {{ $auto['dr_surn'] }}</td>
+            <td>
+                <input type="date">
+            </td>
+            <td>
+                <input type="text">
+            </td>
+            <td>
+                <input type="text">
+            </td>
+            <td>
+                <input type="text">
+            </td>
         </tr>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-            <th style="display: none">id</th>
-        </tr>
+    @endforeach
+    </tbody>
+</table>
 
-        </thead>
-        <tbody>
-        @foreach($autos as $auto)
-            <tr>
-                <td>
-                    {{--                    <input class="css-checkbox" id="checkBox_{{ $auto['id'] }}" type="checkbox">--}}
-                    {{--                    <label for="checkBox_{{ $auto['id'] }}" class="css-label lite-blue-check"></label>--}}
-                </td>
-                <td>{{ $auto->carrier['name'] }}</td>
-                <td>{{ $auto['mark'] }}</td>
-                <td>{{ $auto['auto_num'] }}</td>
-                <td>{{ $auto['trail_num'] }}</td>
-                <td>{{ $auto['dr_surn'] }}</td>
-                <td>{{ $auto['dr_name'] }}</td>
-                <td>{{ $auto['dr_fath'] }}</td>
-                <td>{{ $auto['tel'] }}</td>
-                <td>{{ $auto['notes'] }}</td>
-                <td style="display: none">{{ $auto['id'] }}</td>
-            </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-        <tr>
-            <th></th>
-            <th>Назва</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Замiтки</th>
-        </tr>
-    </table>
-
-{{--    <div class="table-wrapper" style="overflow: auto; display: flex">--}}
-{{--    </div>--}}
 @endsection
 
 @section('footer')
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+{{--MY JS--}}
 <script src="/js/go.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
+
+{{--BOOTSTRAP--}}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+{{--BOOTSTRAP-SELECT--}}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+
+{{--SEMANTIC--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>--}}
 @endsection
 

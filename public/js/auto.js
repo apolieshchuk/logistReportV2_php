@@ -56,7 +56,7 @@ $('#clearButton').click(function () {
 $('#goButton').click(function () {
     const autos = getSelectedRows()
     if (autos.length === 0) {
-        alert('Не вибрані авто для відправлення на маршрут')
+        return alert('Не вибрано жодного авто для відправлення на маршрут');
     }
 
     // get selected id's
@@ -64,15 +64,13 @@ $('#goButton').click(function () {
        return auto.pop();
     });
 
+    // console.log({ 'autos': autos});
+
+    // set autos to session
+    document.cookie = `ids=${ids}`;
+
     //save auto id's data in storage and redirect to another route
-    $.ajax({
-        type: "POST",
-        url: "/go",
-        data: JSON.stringify(ids),
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
-        }
-    });
+    window.location = '/go';
 })
 
 // data-tables functions
