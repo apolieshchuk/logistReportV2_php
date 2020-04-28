@@ -8,64 +8,69 @@
 {{--MY CSS--}}
 <link rel="stylesheet" href="/css/go.css">
 {{--BOOTSTRAP--}}
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+{{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--}}
 {{--BOOTSTRAP-SELECT--}}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+{{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">--}}
 {{--SEMANTIC--}}
-{{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>--}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
 @endsection
 
 @section('body')
 
 {{--SELECT PICKER--}}
-<div style="text-align: center">
-    <label for="selectpicker"> Маршрут </label>
-    <select class="selectpicker">
-        <option value="">State</option>
-        <option data-tokens="ketchup mustard">Hot Dog, Fries and a Soda</option>
-        <option data-tokens="mustard">Burger, Shake and a Smile</option>
-        <option data-tokens="frosting">Sugar, Spice and all things nice</option>
+<div style="text-align: center; margin: 20px">
+    <select class="ui search dropdown">
+        <option value="Виберіть маршрут">Виберіть маршрут</option>
+        @foreach($routes as $route)
+            <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
+        @endforeach
     </select>
 </div>
 
-<hr>
+<hr style="margin-bottom: 20px;">
 
 {{--MAIN TABLE--}}
-
-<table class="table table-striped" style="width: 80%; margin: auto;
- table-layout: fixed">
+<table class="ui celled table" style="width: 80%; margin: auto">
     <thead>
-    <tr>
-        <th scope="col">#</th>
-        <th scope="col">Перевізник</th>
-        <th scope="col">Авто</th>
-        <th scope="col">Причеп</th>
-        <th scope="col">Водій</th>
-        <th scope="col">Дата</th>
-        <th scope="col">Ф1</th>
-        <th scope="col">Ф2</th>
-        <th scope="col">Тр</th>
-    </tr>
+        <tr>
+            <th>#</th>
+            <th class="three wide">Перевізник</th>
+            <th class="two wide">Авто</th>
+            <th class="two wide">Причеп</th>
+            <th class="two wide">Водій</th>
+            <th class="one wide">Дата</th>
+            <th class="two wide">Ф1</th>
+            <th class="two wide">Ф2</th>
+            <th class="one wide">Тр</th>
+        </tr>
     </thead>
     <tbody>
     @foreach($autos as $key => $auto)
         <tr>
-            <th scope="row">{{ $key + 1 }}</th>
-            <td> {{ $auto->carrier['name'] }}</td>
-            <td> {{ $auto['auto_num'] }}</td>
-            <td> {{ $auto['trail_num'] }}</td>
-            <td> {{ $auto['dr_surn'] }}</td>
-            <td>
-                <input type="date">
+            <td data-label="#">{{ $key + 1 }}</td>
+            <td data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
+            <td data-label="Авто"> {{ $auto['auto_num'] }}</td>
+            <td data-label="Причіп"> {{ $auto['trail_num'] }}</td>
+            <td data-label="Водій"> {{ $auto['dr_surn'] }}</td>
+            <td data-label="Дата">
+                <div class="ui input" >
+                    <input style="padding-right: 2px;padding-left: 2px" type="date">
+                </div>
             </td>
-            <td>
-                <input type="text">
+            <td data-label="Ф1">
+                <div class="ui input" style="padding: 2px" >
+                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                </div>
             </td>
-            <td>
-                <input type="text">
+            <td data-label="Ф2">
+                <div class="ui input">
+                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                </div>
             </td>
-            <td>
-                <input type="text">
+            <td data-label="Тр">
+                <div class="ui input">
+                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                </div>
             </td>
         </tr>
     @endforeach
@@ -79,15 +84,16 @@
 <script src="/js/go.js"></script>
 
 {{--BOOTSTRAP--}}
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+{{--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>--}}
+{{--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>--}}
+{{--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>--}}
 
 {{--BOOTSTRAP-SELECT--}}
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>--}}
 
 {{--SEMANTIC--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>--}}
-{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
+
 @endsection
 

@@ -1,7 +1,13 @@
 body{
-    padding: 20px;
+    height: auto !important;
+}
+input {
+    width: 100%;
 }
 
+input[type='date'] {
+    width: 140px;
+}
 /*table th {*/
 /*    width: auto !important;*/
 /*}*/
