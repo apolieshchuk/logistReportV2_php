@@ -1,4 +1,3 @@
-const NUM_OF_COLUMNS = 10; // and id as last col
 
 // Copy selected rows
 $('#copyButton').click(function () {
@@ -6,35 +5,30 @@ $('#copyButton').click(function () {
     let autos = getSelectedRows();
     if (autos.length === 0) return;
 
-    // we don't need id row
-    autos.forEach( (auto) => {
-        auto.pop();
-    });
+    console.log(autos);
 
-    // replace in readable format
-    const find = ',';
-    const re = new RegExp(find, 'g');
+    // Form strings
+    let logText = "";
+    for (let i = 0; i < autos.length; i++) {
+        logText += `${i+1}) `+
+        `${autos[i].carrier['name']} `+
+        `${autos[i].mark} `+
+        `${autos[i].auto_num} `+
+        `${autos[i].trail_num} `+
+        `${autos[i].driver['surname']} `+
+        `${autos[i].driver['name']} `+
+        `${autos[i].driver['father']} `+
+        `${autos[i].driver['tel']} ` +
+        `${autos[i].driver['license']} \n`
+    }
 
     // copy to clipbord
-    copyToClipboard(autos.join("\n").replace(re,' '));
+    copyToClipboard(logText);
 })
 
 function getSelectedRows() {
     let table = $('#autoTable').DataTable();
-    // objects
-    let data = table.rows( { selected: true }).data();
-
-    // move from objects to array
-    let autos = [];
-    for (let row = 0; row < data.length; row++){
-        let auto = [];
-        auto.push(row + 1 + ")");
-        for (let col = 1; col < NUM_OF_COLUMNS + 1; col++) {
-            auto.push(data[row][col]);
-        }
-        autos.push(auto);
-    }
-    return autos;
+    return table.rows( { selected: true }).data();
 }
 
 function copyToClipboard(text) {
@@ -60,11 +54,10 @@ $('#goButton').click(function () {
     }
 
     // get selected id's
-    const ids = autos.map( (auto) => {
-       return auto.pop();
-    });
-
-    // console.log({ 'autos': autos});
+    const ids = [];
+    for (let i = 0; i < autos.length; i++) {
+        ids.push(autos[i].id);
+    }
 
     // set autos to session
     document.cookie = `ids=${ids}`;
@@ -96,7 +89,6 @@ $(document).ready(function() {
             {data: 'driver.father'},
             {data: 'driver.tel'},
             {data: 'driver.license'},
-            {data: 'id'},
         ],
         columnDefs: [ {
             orderable: false,
@@ -111,8 +103,9 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
-        deferRender: true,
+        // deferRender: true,
     });
+
 
     // Apply the search
     table.columns().every( function () {

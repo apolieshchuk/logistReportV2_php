@@ -84,7 +84,6 @@ $(document).ready(function() {
             {data: 'f1'},
             {data: 'tr'},
             {data: 'notes'},
-            {data: 'id'},
         ]
     });
 

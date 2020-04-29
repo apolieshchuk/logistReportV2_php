@@ -1,58 +1,3 @@
-tfoot input {
-    width: 100%;
-    padding: 3px;
-    box-sizing: border-box;
-}
-
-table {
-    width: 100%;
-}
-
-table th input {
-    /*border-radius: 5px;*/
-    /*outline: none;*/
-}
-
-body {
-    /*background-color: #c4d3f6;*/
-}
-
-.button {
-    position: relative;
-    background-color: #3399FF;
-    border: none;
-    font-size: 18px;
-    color: #FFFFFF;
-    padding: 5px;
-    width: 120px;
-    height: 30px;
-    text-align: center;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
-}
-
-.button:after {
-    content: "";
-    background: #66CCCC;
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px!important;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s
-}
-
-.button:active:after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s
-}
 
 header {
     text-align: center;
@@ -63,29 +8,47 @@ tbody tr:hover{
 }
 
 /* Column size */
-th:first-child, th:first-child input {
+table tr th:first-child, th:first-child input {
     width: 5px;
 }
 
-th:nth-child(2), th:nth-child(2) input {
-    width: 180px;
+table tr th:nth-child(2), th:nth-child(2) input,
+table tr th:nth-child(3), th:nth-child(3) input {
+    width: 80px;
 }
 
-th:nth-child(3), th:nth-child(3) input {
+table tr th:nth-child(4), th:nth-child(4) input {
+    width: 70px;
+}
+
+table tr th:nth-child(5), th:nth-child(5) input {
+    width: 150px;
+}
+
+table tr th:nth-child(6), th:nth-child(6) input {
+    width: 150px;
+}
+
+table tr th:nth-child(7), th:nth-child(7) input,
+table tr th:nth-child(8), th:nth-child(8) input{
+    width: 90px;
+}
+
+table tr th:nth-child(9), th:nth-child(9) input {
+    width: 80px;
+}
+
+table tr th:nth-child(10), th:nth-child(10) input,
+table tr th:nth-child(11), th:nth-child(11) input,
+table tr th:nth-child(12), th:nth-child(12) input{
     width: 30px;
 }
 
-th:nth-child(4), th:nth-child(4) input,
-th:nth-child(5), th:nth-child(5) input,
-th:nth-child(6), th:nth-child(6) input,
-th:nth-child(7), th:nth-child(7) input {
-    width: 110px;
+table tr th:nth-child(13), th:nth-child(13) input {
+    width: 80px;
 }
 
-th:nth-child(8), th:nth-child(8) input,
-th:nth-child(9), th:nth-child(9) input {
-    width: 130px;
-}
+
 
 table.dataTable thead th {
     padding: 5px 9px;
@@ -96,37 +59,23 @@ table.dataTable thead th {
     display: none;
 }
 
-/* CSS Created by CSS CHECKBOX */
-/**********************************/
-/**** www.CSScheckbox.com *********/
+tr input[type="text"] {
+    border: 1px solid #cccccc;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    background: #ffffff !important;
+    outline: none;
+    padding-left: 2px;
+    height: 24px;
+    /*width: 120px;*/
+    color: #333333;
+    font-size: 12px;
+    font-family: Tahoma, serif;
+}
 
-/*general styles for all CSS Checkboxes*/
-/*input[type=checkbox].css-checkbox {*/
-/*    position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;*/
-/*}*/
-
-/*input[type=checkbox].css-checkbox + label.css-label {*/
-/*    padding-left:30px;*/
-/*    height:25px;*/
-/*    display:inline-block;*/
-/*    line-height:25px;*/
-/*    background-repeat:no-repeat;*/
-/*    background-position: 0 0;*/
-/*    font-size:25px;*/
-/*    vertical-align:middle;*/
-/*    cursor:pointer;*/
-
-/*}*/
-
-/*input[type=checkbox].css-checkbox:checked + label.css-label {*/
-/*    background-position: 0 -25px;*/
-/*}*/
-/*label.css-label {*/
-/*    background-image:url(http://csscheckbox.com/checkboxes/u/csscheckbox_391ce065f36b1460c4845fa9b5173fba.png);*/
-/*    -webkit-touch-callout: none;*/
-/*    -webkit-user-select: none;*/
-/*    -khtml-user-select: none;*/
-/*    -moz-user-select: none;*/
-/*    -ms-user-select: none;*/
-/*    user-select: none;*/
-/*}*/
+input[type="text"]:focus {
+    color: #333333;
+    border: 1px solid #00b5ad
+}

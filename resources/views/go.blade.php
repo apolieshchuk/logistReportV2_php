@@ -17,15 +17,20 @@
 
 @section('body')
 
-{{--SELECT PICKER--}}
-<div style="text-align: center; margin: 20px;">
-    <select class="ui search dropdown">
-        <option value="Виберіть маршрут">Виберіть маршрут</option>
-        @foreach($routes as $route)
-            <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
-        @endforeach
-    </select>
+<div style="display: flex; justify-content: center">
+    {{--SELECT PICKER--}}
+    <div style="text-align: center; margin: 20px;">
+        <select class="ui search dropdown">
+            <option value="Виберіть маршрут">Оберіть маршрут</option>
+            @foreach($routes as $route)
+                <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <button style="align-self: center" class="ui blue button" id="goButton2">Відправити</button>
 </div>
+
 
 <hr style="margin-bottom: 20px;">
 
@@ -92,8 +97,10 @@
 {{--BOOTSTRAP-SELECT--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>--}}
 
-{{--SEMANTIC--}}
+{{--JQUERY--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+{{--SEMANTIC--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
 
 @endsection

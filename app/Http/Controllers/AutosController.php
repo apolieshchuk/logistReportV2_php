@@ -14,6 +14,7 @@ class AutosController extends Controller
     }
 
     public function dataLoad() {
+        // DONT CHANGE OBJECT. USING IN JS
         $autos = Autos::with([
             'carrier:id,name',
             'driver:id,surname,name,father,tel,license'
