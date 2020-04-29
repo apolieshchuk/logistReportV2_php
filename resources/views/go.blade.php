@@ -18,7 +18,7 @@
 @section('body')
 
 {{--SELECT PICKER--}}
-<div style="text-align: center; margin: 20px">
+<div style="text-align: center; margin: 20px;">
     <select class="ui search dropdown">
         <option value="Виберіть маршрут">Виберіть маршрут</option>
         @foreach($routes as $route)
@@ -30,7 +30,8 @@
 <hr style="margin-bottom: 20px;">
 
 {{--MAIN TABLE--}}
-<table class="ui celled table" style="width: 80%; margin: auto">
+{{--TODO MOBILE VERSION--}}
+<table class="ui celled table" style="width: 80%; margin: auto; min-width: 800px">
     <thead>
         <tr>
             <th>#</th>
@@ -39,9 +40,9 @@
             <th class="two wide">Причеп</th>
             <th class="two wide">Водій</th>
             <th class="one wide">Дата</th>
-            <th class="two wide">Ф1</th>
-            <th class="two wide">Ф2</th>
-            <th class="one wide">Тр</th>
+            <th class="two wide" style="min-width: 80px">Ф1</th>
+            <th class="two wide" style="min-width: 80px">Ф2</th>
+            <th class="one wide" style="min-width: 80px">Тр</th>
         </tr>
     </thead>
     <tbody>
@@ -51,7 +52,7 @@
             <td data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
             <td data-label="Авто"> {{ $auto['auto_num'] }}</td>
             <td data-label="Причіп"> {{ $auto['trail_num'] }}</td>
-            <td data-label="Водій"> {{ $auto['dr_surn'] }}</td>
+            <td data-label="Водій"> {{ $auto->driver->surname }}</td>
             <td data-label="Дата">
                 <div class="ui input" >
                     <input style="padding-right: 2px;padding-left: 2px" type="date">

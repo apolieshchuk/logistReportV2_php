@@ -1,6 +1,6 @@
 <?php
 
-use App\Carrier;
+use App\Carriers;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -26,7 +26,7 @@ class CarrierSeeder extends Seeder
             if($validator->fails()) continue;
 
             // add new
-            Carrier::create(
+            Carriers::create(
                 [
                     'name' => $auto['name'],
                     'code' => $auto['code'],

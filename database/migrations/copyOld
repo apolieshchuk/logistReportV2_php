@@ -1,1 +1,1 @@
-mysqldump --user=root --password=Fleep123 aipx_logrep auto | mysql --user=root --password=Fleep123 logist
+mysqldump --user=root --password=Fleep123 aipx_logrep reptable_old | mysql --user=root --password=Fleep123 logist

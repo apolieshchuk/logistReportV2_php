@@ -1,7 +1,8 @@
 <?php
 
-use App\Auto;
-use App\Carrier;
+use App\Autos;
+use App\Carriers;
+use App\Contacts;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -18,17 +19,17 @@ class AutoSeeder extends Seeder
 
         foreach ($autos as $auto) {
             $auto = get_object_vars($auto);
-            Auto::firstOrCreate(
+            Autos::firstOrCreate(
                 [
-                    'carrier_id' => Carrier::where('name', $auto['name'])->first()->id,
+                    'carrier_id' => Carriers::where('name', $auto['name'])->first()->id,
                     'mark' => $auto['mark'],
                     'auto_num' => $auto['auto_num'],
                     'trail_num' => $auto['trail_num'],
-                    'dr_surn' => $auto['dr_surn'],
-                    'dr_name' => $auto['dr_name'],
-                    'dr_fath' => $auto['dr_fath'],
-                    'tel'=> $auto['tel'],
-                    'notes'=> $auto['notes'],
+                    'driver_id' => Contacts::where([
+                        ['name','=', $auto['dr_name']],
+                        ['surname','=', $auto['dr_surn']],
+                        ['father','=', $auto['dr_fath']],
+                    ])->first()->id
                 ]
             );
         }

@@ -32,7 +32,7 @@
                 <th>Iмя</th>
                 <th>По-батьк</th>
                 <th>Тел</th>
-                <th>Замiтки</th>
+                <th>Посвідчення</th>
                 <th style="display: none">id</th>
             </tr>
             <tr>
@@ -45,7 +45,7 @@
                 <th>Iмя</th>
                 <th>По-батьк</th>
                 <th>Тел</th>
-                <th>Замiтки</th>
+                <th>Посвідчення</th>
                 <th style="display: none">id</th>
             </tr>
         </thead>
@@ -60,7 +60,7 @@
                 <th>Iмя</th>
                 <th>По-батьк</th>
                 <th>Тел</th>
-                <th>Замiтки</th>
+                <th>Посвідчення</th>
                 <th style="display: none">id</th>
             </tr>
         </tfoot>
@@ -72,11 +72,11 @@
                 <td>{{ $auto['mark'] }}</td>
                 <td>{{ $auto['auto_num'] }}</td>
                 <td>{{ $auto['trail_num'] }}</td>
-                <td>{{ $auto['dr_surn'] }}</td>
-                <td>{{ $auto['dr_name'] }}</td>
-                <td>{{ $auto['dr_fath'] }}</td>
-                <td>{{ $auto['tel'] }}</td>
-                <td>{{ $auto['notes'] }}</td>
+                <td>{{ $auto->driver->surname }}</td>
+                <td>{{ $auto->driver->name }}</td>
+                <td>{{ $auto->driver->father }}</td>
+                <td>{{ $auto->driver->tel }}</td>
+                <td>{{ $auto->driver->license }}</td>
                 <td style="display: none">{{ $auto['id'] }}</td>
             </tr>
         @endforeach

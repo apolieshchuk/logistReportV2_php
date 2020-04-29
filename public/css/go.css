@@ -8,6 +8,11 @@ input {
 input[type='date'] {
     width: 140px;
 }
+
+/*SELECT ROUTE BUTTON*/
+.search {
+    width: 300px;
+}
 /*table th {*/
 /*    width: auto !important;*/
 /*}*/
@@ -17,7 +22,7 @@ input[type='date'] {
 /*    width: 1%;*/
 /*}*/
 
-/*!*Carrier*!*/
+/*!*Carriers*!*/
 /*tr th:nth-child(2), tr td:nth-child(1) {*/
 /*    width: 20%;*/
 /*}*/

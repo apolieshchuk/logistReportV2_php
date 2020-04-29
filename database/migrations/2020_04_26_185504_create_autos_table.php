@@ -19,14 +19,12 @@ class CreateAutosTable extends Migration
             $table->string('mark')->nullable();
             $table->string('auto_num')->nullable();
             $table->string('trail_num')->nullable();
-            $table->string('dr_surn')->nullable();
-            $table->string('dr_name')->nullable();
-            $table->string('dr_fath')->nullable();
-            $table->string('tel')->nullable();
+            $table->unsignedBigInteger('driver_id')->nullable();
             $table->string('notes')->nullable();
             $table->timestamps();
 
             $table->foreign('carrier_id')->references('id')->on('carriers');
+            $table->foreign('driver_id')->references('id')->on('contacts');
         });
     }
 

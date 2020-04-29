@@ -13,5 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','AutoController@index')->name('auto.index');
+Route::get('/','AutosController@index')->name('auto.index');
 Route::get('/go','GoController@index')->name('go.index');
