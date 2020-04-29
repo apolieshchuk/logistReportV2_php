@@ -84,12 +84,14 @@ $(document).ready(function() {
     // DataTable
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
-        ajax: '/data-load',
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
+        // bPaginate: false,
+        columnDefs: [
+            {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0,
+            }
+        ],
         select: {
             style:    'multi',
             // selector: 'td:first-child'
@@ -98,7 +100,7 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
-        deferRender: true,
+        ajax: '/data-load',
     });
 
     // Apply the search

@@ -76,56 +76,89 @@ $('#goButton').click(function () {
 // data-tables functions
 $(document).ready(function() {
     // Setup - add a text input to each footer cell
-    $('#autoTable thead tr:eq(1) th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
-    } );
+    // $('#autoTable thead tr:eq(1) th').each( function () {
+    //     var title = $(this).text();
+    //     $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
+    // } );
 
     // DataTable
     const table = $('#autoTable').DataTable({
-        bAutoWidth: false,
-        ajax: '/data-load',
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
-        select: {
-            style:    'multi',
-            // selector: 'td:first-child'
+        // bAutoWidth: false,
+        // bPaginate: false,
+        // columnDefs: [
+        //     {
+        //         orderable: false,
+        //         className: 'select-checkbox',
+        //         targets:   0,
+        //     }
+        // ],
+        deferRender:    true,
+        select: true,
+        // scrollY:        200,
+        // scrollCollapse: true,
+        // scroller:       true,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            url: '/data-report',
+            type: 'GET',
         },
-        order: [[ 1, 'asc' ]],
-        orderCellsTop: true,
-        fixedHeader: true,
-        pageLength: 10,
-        deferRender: true,
+        // deferLoading: 0,
+        // deferRender: true,
+        columns: [
+            {
+                data: undefined,
+                defaultContent: ""
+            },
+            { data: 'date'},
+            { data: 'manager_id'},
+            { data: 'cargo_id'},
+            { data: 'route_id'},
+            { data: 'carrier_id'},
+            { data: 'auto_num'},
+            { data: 'trail_num'},
+            { data: 'driver_id'},
+            { data: 'f2'},
+            { data: 'f1'},
+            { data: 'tr'},
+            { data: 'notes'},
+            { data: 'id'},
+        ],
+        // select: {
+        //     style:    'multi',
+        //     // selector: 'td:first-child'
+        // },
+        // order: [[ 1, 'asc' ]],
+        // orderCellsTop: true,
+        // fixedHeader: true,
+        // pageLength: 10
     });
 
     // Apply the search
-    table.columns().every( function () {
-        var that = this;
-
-        $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
+    // table.columns().every( function () {
+    //     var that = this;
+    //
+    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //         if ( that.search() !== this.value ) {
+    //             that
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
 
     // move filter box outside table
-    $("#filterbox").keyup(function() {
-        table.search(this.value).draw();
-    });
+    // $("#filterbox").keyup(function() {
+    //     table.search(this.value).draw();
+    // });
 
     // filters under columns
-    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
-        table
-            .column( $(this).parent().index() )
-            .search( this.value )
-            .draw();
-    } );
+    // $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
+    //     table
+    //         .column( $(this).parent().index() )
+    //         .search( this.value )
+    //         .draw();
+    // } );
 } )
 
 // For fast table load

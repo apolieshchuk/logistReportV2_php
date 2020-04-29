@@ -20,7 +20,7 @@
         </div>
     </nav>
 
-    <table id="autoTable" class="display" style="width:100%; display: none;">
+    <table id="autoTable" class="display" style="width:100%;">
         <thead>
             <tr>
                 <th></th>
@@ -65,26 +65,23 @@
             </tr>
         </tfoot>
         <tbody>
-        @foreach($autos as $auto)
-            <tr>
-                <td></td>
-                <td>{{ $auto->carrier['name'] }}</td>
-                <td>{{ $auto['mark'] }}</td>
-                <td>{{ $auto['auto_num'] }}</td>
-                <td>{{ $auto['trail_num'] }}</td>
-                <td>{{ $auto->driver->surname }}</td>
-                <td>{{ $auto->driver->name }}</td>
-                <td>{{ $auto->driver->father }}</td>
-                <td>{{ $auto->driver->tel }}</td>
-                <td>{{ $auto->driver->license }}</td>
-                <td style="display: none">{{ $auto['id'] }}</td>
-            </tr>
-        @endforeach
+{{--        @foreach($autos as $auto)--}}
+{{--            <tr>--}}
+{{--                <td></td>--}}
+{{--                <td>{{ $auto->carrier['name'] }}</td>--}}
+{{--                <td>{{ $auto['mark'] }}</td>--}}
+{{--                <td>{{ $auto['auto_num'] }}</td>--}}
+{{--                <td>{{ $auto['trail_num'] }}</td>--}}
+{{--                <td>{{ $auto->driver->surname }}</td>--}}
+{{--                <td>{{ $auto->driver->name }}</td>--}}
+{{--                <td>{{ $auto->driver->father }}</td>--}}
+{{--                <td>{{ $auto->driver->tel }}</td>--}}
+{{--                <td>{{ $auto->driver->license }}</td>--}}
+{{--                <td style="display: none">{{ $auto['id'] }}</td>--}}
+{{--            </tr>--}}
+{{--        @endforeach--}}
         </tbody>
     </table>
-
-{{--    <div class="table-wrapper" style="overflow: auto; display: flex">--}}
-{{--    </div>--}}
 @endsection
 
 @section('footer')
