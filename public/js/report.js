@@ -49,7 +49,6 @@ $('#goButton').click(function () {
 // data-tables functions
 $(document).ready(function() {
     const urlParams = new URLSearchParams(window.location.search);
-    // urlParams.get('myParam');
 
     // DataTable
     const table = $('#autoTable').DataTable({
@@ -70,7 +69,23 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
-        ajax: `/report/data-load`,
+        ajax: `/report/data-load?report_from=${$('#from').attr('value')}&report_to=${$('#to').attr('value')}`,
+        columns: [
+            {data: null, defaultContent: ""},
+            {data: 'date'},
+            {data: 'manager.surname'},
+            {data: 'cargo.name'},
+            {data: 'route.name'},
+            {data: 'carrier.name'},
+            {data: 'auto_num'},
+            {data: 'trail_num'},
+            {data: 'driver.surname'},
+            {data: 'f2'},
+            {data: 'f1'},
+            {data: 'tr'},
+            {data: 'notes'},
+            {data: 'id'},
+        ]
     });
 
     // Setup - add a text input to each footer cell

@@ -85,6 +85,19 @@ $(document).ready(function() {
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
         ajax: '/data-load',
+        columns: [
+            {data: null, defaultContent: ""},
+            {data: 'carrier.name'},
+            {data: 'mark'},
+            {data: 'auto_num'},
+            {data: 'trail_num'},
+            {data: 'driver.surname'},
+            {data: 'driver.name'},
+            {data: 'driver.father'},
+            {data: 'driver.tel'},
+            {data: 'driver.license'},
+            {data: 'id'},
+        ],
         columnDefs: [ {
             orderable: false,
             className: 'select-checkbox',

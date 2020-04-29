@@ -10,9 +10,9 @@
     <header style="margin-bottom: 10px">
         <form action="/report" method="GET">
             <label for="start-date">Від</label>
-            <input type="date" value="{{ config('constants.report_from') }}" name="start-date">
+            <input type="date" id="from" value="{{ request('report_from') ?? config('constants.report_from') }}" name="report_from">
             <label for="end-date">До</label>
-            <input type="date" value="{{ config('constants.report_to') }}" name="end-date">
+            <input type="date" id="to" value="{{ request('report_to') ?? config('constants.report_to') }}" name="report_to">
             <input type="submit">
         </form>
 {{--        <button class="button" id="clearButton">Очистити</button>--}}
