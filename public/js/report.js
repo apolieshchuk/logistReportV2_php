@@ -1,24 +1,5 @@
 const NUM_OF_COLUMNS = 10; // and id as last col
 
-// Copy selected rows
-$('#copyButton').click(function () {
-
-    let autos = getSelectedRows();
-    if (autos.length === 0) return;
-
-    // we don't need id row
-    autos.forEach( (auto) => {
-        auto.pop();
-    });
-
-    // replace in readable format
-    const find = ',';
-    const re = new RegExp(find, 'g');
-
-    // copy to clipbord
-    copyToClipboard(autos.join("\n").replace(re,' '));
-})
-
 function getSelectedRows() {
     let table = $('#autoTable').DataTable();
     // objects
@@ -37,14 +18,6 @@ function getSelectedRows() {
     return autos;
 }
 
-function copyToClipboard(text) {
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
-}
 
 // clear checked
 $('#clearButton').click(function () {
@@ -75,11 +48,8 @@ $('#goButton').click(function () {
 
 // data-tables functions
 $(document).ready(function() {
-    // Setup - add a text input to each footer cell
-    $('#autoTable thead tr:eq(1) th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
-    } );
+    const urlParams = new URLSearchParams(window.location.search);
+    // urlParams.get('myParam');
 
     // DataTable
     const table = $('#autoTable').DataTable({
@@ -100,8 +70,14 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
-        ajax: '/data-load',
+        ajax: `/report/data-load`,
     });
+
+    // Setup - add a text input to each footer cell
+    $('#autoTable thead tr:eq(1) th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
+    } );
 
     // Apply the search
     table.columns().every( function () {
@@ -135,3 +111,4 @@ window.onload = function() {
     // change autoTable vision
     // document.getElementById("autoTable").style.display = 'block';
 };
+

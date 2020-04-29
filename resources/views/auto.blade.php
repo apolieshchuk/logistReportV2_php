@@ -64,7 +64,7 @@
                 <th style="display: none">id</th>
             </tr>
         </tfoot>
-        <tbody>
+{{--        <tbody>--}}
 {{--        @foreach($autos as $auto)--}}
 {{--            <tr>--}}
 {{--                <td></td>--}}
@@ -80,7 +80,7 @@
 {{--                <td style="display: none">{{ $auto['id'] }}</td>--}}
 {{--            </tr>--}}
 {{--        @endforeach--}}
-        </tbody>
+{{--        </tbody>--}}
     </table>
 @endsection
 
