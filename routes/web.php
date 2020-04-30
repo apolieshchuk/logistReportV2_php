@@ -18,3 +18,4 @@ Route::get('/data-load','AutosController@dataLoad')->name('auto.dataLoad');
 Route::get('/go','GoController@index')->name('go.index');
 Route::get('/report','ReportsController@index')->name('report.index');
 Route::get('/report/data-load','ReportsController@dataLoad')->name('report.dataLoad');
+Route::post('/report','ReportsController@store')->name('report.store');

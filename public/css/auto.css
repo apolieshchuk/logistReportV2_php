@@ -18,6 +18,10 @@ tfoot input {
     display: none;
 }
 
+#filter-col {
+    border: none;
+}
+
 tr input[type="text"] {
     border: 1px solid #cccccc;
     border-radius: 3px;

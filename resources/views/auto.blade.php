@@ -17,25 +17,28 @@
 
 @section('body')
 
-<div style="padding: 0 10px">
+<div style="padding: 0 10px; display: flex; flex-direction: column">
 {{--    <header style="margin-bottom: 10px; display: flex; justify-content: center">--}}
 {{--        <button class="ui teal button" id="clearButton">Очистити</button>--}}
 {{--        <button class="ui teal button" id="copyButton">Копіювати</button>--}}
 {{--        <button class="ui teal button" id="goButton">Відправити</button>--}}
 {{--        <form action="/report"><input class="ui teal button" type="submit" value="Звіт"></form>--}}
 {{--    </header>--}}
-    <div  style="margin-bottom: 10px;" class="four ui buttons">
+    <div  style="margin-bottom: 10px; width: 500px; align-self: center" class="four ui buttons" >
         <button class="ui blue button" id="clearButton">Очистити</button>
-        <button class="ui blue button" id="copyButton">Копіювати</button>
+        <button class="ui blue button" id="copyButton" onclick="copyAutos()">Копіювати</button>
         <button class="ui blue button" id="goButton">Відправити</button>
-        <form action="/report"><input class="ui blue button" type="submit" value="Звіт"></form>
+        <form action="/report">
+            <input style="border-bottom-left-radius: 0; border-top-left-radius: 0"
+                   class="ui blue button" type="submit" value="Звіт">
+        </form>
     </div>
     <nav style="margin-bottom: 10px; text-align: center" class="navbar navbar-default" role="navigation">
         <div style="text-align: center" class="navbar-text ui input">
             <input style="height: 35px" type="text" id="filterbox" placeholder="Пошук">
         </div>
     </nav>
-
+    <hr style="width: 100%; height: 1px">
     <table id="autoTable" class="display cell-border" style="width:100%;">
         <thead>
         <tr>

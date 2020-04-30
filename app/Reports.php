@@ -6,6 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reports extends Model
 {
+    protected $fillable = [
+        'date',
+        'manager_id',
+        'cargo_id',
+        'route_id',
+        'carrier_id',
+        'auto_num',
+        'trail_num',
+        'driver_id',
+        'f2',
+        'f1',
+        'tr'];
 
     public function manager() {
         return $this->belongsTo(Contacts::class, 'manager_id', 'id');

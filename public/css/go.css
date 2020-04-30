@@ -10,7 +10,7 @@ input[type='date'] {
 }
 
 /*SELECT ROUTE BUTTON*/
-.search {
+.search:last-child {
     width: 300px;
 }
 /*table th {*/

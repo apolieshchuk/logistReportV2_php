@@ -13,6 +13,7 @@
 {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">--}}
 {{--SEMANTIC--}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+<meta name="csrf_token" content="{{ csrf_token() }}" />
 @endsection
 
 @section('body')
@@ -20,15 +21,30 @@
 <div style="display: flex; justify-content: center">
     {{--SELECT PICKER--}}
     <div style="text-align: center; margin: 20px;">
-        <select class="ui search dropdown">
-            <option value="Виберіть маршрут">Оберіть маршрут</option>
+        <select id="managerSelect" class="ui search dropdown">
+            <option value="Оберіть менеджера">Оберіть менеджера</option>
+            @foreach($managers as $manager)
+                <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
+            @endforeach
+        </select>
+        <select id="cargoSelect" class="ui search dropdown">
+            <option value="Оберіть менеджера">Оберіть вантаж</option>
+            @foreach($cargos as $cargo)
+                <option value="{{ $cargo['id'] }}">{{ $cargo['name'] }}</option>
+            @endforeach
+        </select>
+        <select id="routeSelect" class="ui search dropdown">
+            <option value="Оберіть маршрут">Оберіть маршрут</option>
             @foreach($routes as $route)
                 <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
             @endforeach
         </select>
     </div>
 
-    <button style="align-self: center" class="ui blue button" id="goButton2">Відправити</button>
+    <button
+        onclick="sendReport()"
+        style="align-self: center" class="ui blue button" id="goButton2"
+    >Відправити</button>
 </div>
 
 
@@ -45,39 +61,41 @@
             <th class="two wide">Причеп</th>
             <th class="two wide">Водій</th>
             <th class="one wide">Дата</th>
-            <th class="two wide" style="min-width: 80px">Ф1</th>
             <th class="two wide" style="min-width: 80px">Ф2</th>
+            <th class="two wide" style="min-width: 80px">Ф1</th>
             <th class="one wide" style="min-width: 80px">Тр</th>
         </tr>
     </thead>
     <tbody>
     @foreach($autos as $key => $auto)
-        <tr>
-            <td data-label="#">{{ $key + 1 }}</td>
-            <td data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
-            <td data-label="Авто"> {{ $auto['auto_num'] }}</td>
-            <td data-label="Причіп"> {{ $auto['trail_num'] }}</td>
-            <td data-label="Водій"> {{ $auto->driver->surname }}</td>
+        <tr class="data-row">
+            <td class="data-col" data-label="#">{{ $key + 1 }}</td>
+            <td class="data-col" data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
+            <td class="data-col" data-label="Авто"> {{ $auto['auto_num'] }}</td>
+            <td class="data-col" data-label="Причіп"> {{ $auto['trail_num'] }}</td>
+            <td class="data-col" data-label="Водій"> {{ $auto->driver->surname }}</td>
             <td data-label="Дата">
                 <div class="ui input" >
-                    <input style="padding-right: 2px;padding-left: 2px" type="date">
-                </div>
-            </td>
-            <td data-label="Ф1">
-                <div class="ui input" style="padding: 2px" >
-                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                    <input class="data-col" style="padding-right: 2px;padding-left: 2px" type="date">
                 </div>
             </td>
             <td data-label="Ф2">
+                <div class="ui input" style="padding: 2px" >
+                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
+                </div>
+            </td>
+            <td data-label="Ф1">
                 <div class="ui input">
-                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
                 </div>
             </td>
             <td data-label="Тр">
                 <div class="ui input">
-                    <input style="padding-right: 5px;padding-left: 5px" type="text">
+                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
                 </div>
             </td>
+            <input type="hidden" class="data-col" value="{{ $auto["carrier_id"] }}">
+            <input type="hidden" class="data-col" value="{{ $auto["driver_id"] }}">
         </tr>
     @endforeach
     </tbody>

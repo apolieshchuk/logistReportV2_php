@@ -1,11 +1,11 @@
 
 // Copy selected rows
-$('#copyButton').click(function () {
+function copyAutos() {
 
     let autos = getSelectedRows();
     if (autos.length === 0) return;
 
-    console.log(autos);
+    // console.log(autos);
 
     // Form strings
     let logText = "";
@@ -24,7 +24,7 @@ $('#copyButton').click(function () {
 
     // copy to clipbord
     copyToClipboard(logText);
-})
+};
 
 function getSelectedRows() {
     let table = $('#autoTable').DataTable();
