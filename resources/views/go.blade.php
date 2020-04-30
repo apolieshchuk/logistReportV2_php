@@ -19,26 +19,31 @@
 @section('body')
 
 <div style="display: flex; justify-content: center">
-    {{--SELECT PICKER--}}
-    <div style="text-align: center; margin: 20px;">
-        <select id="managerSelect" class="ui search dropdown">
-            <option value="Оберіть менеджера">Оберіть менеджера</option>
-            @foreach($managers as $manager)
-                <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
-            @endforeach
-        </select>
-        <select id="cargoSelect" class="ui search dropdown">
-            <option value="Оберіть менеджера">Оберіть вантаж</option>
-            @foreach($cargos as $cargo)
-                <option value="{{ $cargo['id'] }}">{{ $cargo['name'] }}</option>
-            @endforeach
-        </select>
-        <select id="routeSelect" class="ui search dropdown">
-            <option value="Оберіть маршрут">Оберіть маршрут</option>
-            @foreach($routes as $route)
-                <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
-            @endforeach
-        </select>
+    <div style="display:flex; flex-direction: column; margin: 10px;">
+        {{--SELECT PICKER--}}
+        <div id="route-select-wrapper" style="margin-bottom: 10px;">
+            <select id="routeSelect" class="ui search dropdown" onchange="initRatio()">
+                <option value="" selected disabled>Оберіть маршрут</option>
+                @foreach($routes as $route)
+                    <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <div style="text-align: center;">
+            <select id="managerSelect" class="ui search dropdown" disabled>
+                <option value="" selected disabled >Оберіть менеджера</option>
+                @foreach($managers as $manager)
+                    <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
+                @endforeach
+            </select>
+            <select id="cargoSelect" class="ui search dropdown" disabled>
+                <option value="" selected disabled>Оберіть вантаж</option>
+                @foreach($cargos as $cargo)
+                    <option value="{{ $cargo['id'] }}">{{ $cargo['name'] }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
 
     <button
@@ -76,25 +81,26 @@
             <td class="data-col" data-label="Водій"> {{ $auto->driver->surname }}</td>
             <td data-label="Дата">
                 <div class="ui input" >
-                    <input class="data-col" style="padding-right: 2px;padding-left: 2px" type="date">
+                    <input class="data-col" style="padding-right: 2px;padding-left: 2px" type="date" value="{{Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
                 </div>
             </td>
             <td data-label="Ф2">
                 <div class="ui input" style="padding: 2px" >
-                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
+                    <input class="data-col data-col-f2" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
                 </div>
             </td>
             <td data-label="Ф1">
                 <div class="ui input">
-                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
+                    <input class="data-col data-col-f1" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
                 </div>
             </td>
-            <td data-label="Тр">
-                <div class="ui input">
-                    <input class="data-col" style="padding-right: 5px;padding-left: 5px" type="text">
-                </div>
+            <td class="data-col-tr"  data-label="Тр">
+                <select class="ui search dropdown">
+                    <option value="0">НІ</option>
+                    <option value="1">ТАК</option>
+                </select>
             </td>
-            <input type="hidden" class="data-col" value="{{ $auto["carrier_id"] }}">
+            <input type="hidden" class="data-col data-col-carrierId" value="{{ $auto["carrier_id"] }}">
             <input type="hidden" class="data-col" value="{{ $auto["driver_id"] }}">
         </tr>
     @endforeach

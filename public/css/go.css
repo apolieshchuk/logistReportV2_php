@@ -10,8 +10,21 @@ input[type='date'] {
 }
 
 /*SELECT ROUTE BUTTON*/
-.search:last-child {
-    width: 300px;
+#route-select-wrapper .search:first-child {
+    width: 395px;
+}
+
+#route-select-wrapper input.search {
+    /*border: 2px solid #dadada;*/
+    border-radius: 7px !important;
+    outline: none !important;
+    border-color: #9ecaed !important;
+    box-shadow: 0 0 10px #9ecaed !important;
+}
+
+.data-col-tr .search {
+    min-width: 100px !important;
+    max-width: 100px !important;
 }
 /*table th {*/
 /*    width: auto !important;*/

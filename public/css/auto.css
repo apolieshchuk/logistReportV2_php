@@ -34,7 +34,7 @@ tr input[type="text"] {
     height: 24px;
     width: 120px;
     color: #333333;
-    font-size: 12px;
+    font-size: 14px;
     font-family: Tahoma, serif;
 }
 
@@ -59,28 +59,33 @@ tbody tr:hover{
 }
 
 /* Column size */
+/*#*/
 th:first-child, th:first-child input {
     width: 5px;
 }
 
+/*carrier*/
 th:nth-child(2), th:nth-child(2) input {
     width: 180px;
 }
 
+/*mark*/
 th:nth-child(3), th:nth-child(3) input {
     width: 50px;
 }
 
+/*auto_num, trail_num, surname, name*/
 th:nth-child(4), th:nth-child(4) input,
 th:nth-child(5), th:nth-child(5) input,
 th:nth-child(6), th:nth-child(6) input,
 th:nth-child(7), th:nth-child(7) input {
-    width: 110px;
+    width: 90px;
 }
 
+/*father, tel*/
 th:nth-child(8), th:nth-child(8) input,
 th:nth-child(9), th:nth-child(9) input {
-    width: 130px;
+    width: 110px;
 }
 
 table.dataTable thead th {

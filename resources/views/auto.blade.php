@@ -24,7 +24,9 @@
 {{--        <button class="ui teal button" id="goButton">Відправити</button>--}}
 {{--        <form action="/report"><input class="ui teal button" type="submit" value="Звіт"></form>--}}
 {{--    </header>--}}
-    <div  style="margin-bottom: 10px; width: 500px; align-self: center" class="four ui buttons" >
+    <div
+        style="margin-bottom: 10px; width: 500px; align-self: center; margin-top: 10px"
+        class="four ui buttons" >
         <button class="ui blue button" id="clearButton">Очистити</button>
         <button class="ui blue button" id="copyButton" onclick="copyAutos()">Копіювати</button>
         <button class="ui blue button" id="goButton">Відправити</button>

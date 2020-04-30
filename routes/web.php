@@ -19,3 +19,4 @@ Route::get('/go','GoController@index')->name('go.index');
 Route::get('/report','ReportsController@index')->name('report.index');
 Route::get('/report/data-load','ReportsController@dataLoad')->name('report.dataLoad');
 Route::post('/report','ReportsController@store')->name('report.store');
+Route::get('/report/ratio','ReportsController@ratio')->name('report.ratio');
