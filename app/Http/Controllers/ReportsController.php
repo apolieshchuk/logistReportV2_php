@@ -73,108 +73,45 @@ class ReportsController extends Controller
      *
      */
     public function ratio() {
-//        return request('data');
-        $arrOfResults = [];
-        foreach (request('data') as $ratioObject) {
-            array_push($arrOfResults, $this->calcRatio($ratioObject));
-        }
+        $amount = request('amount');
+        $route_id = request('route_id');
+        $subject = request('subject');
+        $subject_id = request('subject_id');
 
-        return json_encode(['data' => $arrOfResults]);
-
-    }
-
-    private function calcRatio($ratioObject) {
-
-        // validate object
-        if(!$this->validateRatio($ratioObject)) {
-            return null;
-        }
-
-        // get vars from object
-        $amount = $ratioObject['amount'];
-        $value_id = $ratioObject['value_id'];
-        $object = $this->parseModel($ratioObject['object']);
-        $subject = $this->parseModel($ratioObject['subject']);
-        $moreObjects = $ratioObject['moreObjects'] ?? null;
-
-        // add more objects for "where- filter"
-        $startWhere = Reports::where($object, $value_id);
-
-        if($moreObjects) {
-            foreach ($moreObjects as $obj) {
-                $objName = $this->parseModel($obj['object']);
-                $startWhere = $startWhere->where($objName, $obj['value']);
-            }
-
+        $result = Reports::where('route_id', $route_id);
+        if($subject) {
+            $result = $result->where($subject."_id", $subject_id);
             // check if carrier don't have enough races in route
-            if ($startWhere->count() < $amount/2) {
-                $startWhere = Reports::where($object, $value_id);
+            if ($result->count() < $amount/2) {
+                $result = Reports::where('route_id', $route_id);
             }
         }
-
-        // get most frequency id of subject
-        $frequency_id = $startWhere
+        $result = $result
             ->latest()
-            ->pluck($subject)
-//            ->select($subject)
             ->take($amount)
-            ->groupBy($subject)
-//            ->orderByRaw('COUNT(*) DESC');
-//            ->limit(1)
-//            ->get()
-            ->flatten()
-            ->countBy()
-            ->toArray()
-//        $frequency_id = Reports::select($subject)->where($object, $value_id)
-//            ->take($amount)->get()->toArray();
-        ;
-        asort($frequency_id);
-//        print_r($frequency_id);
-        return array_key_last($frequency_id) ?? 0;
-    }
+            ->get();
 
-    private function validateRatio($ratioObject) {
+        // most frequencies
+        $f1 = $this->getMostFrequency($result, 'f1');
+        $f2 = $this->getMostFrequency($result, 'f2');
+        $tr = $this->getMostFrequency($result, 'tr');
+        $cargo_id = $this->getMostFrequency($result, 'cargo_id');
+        $manager_id = $this->getMostFrequency($result, 'manager_id');
 
-        $validator = \Validator::make($ratioObject, [
-            'amount' => 'required|numeric',
-            'object' => 'required|in:route, carrier',
-            'value_id' => 'required|numeric',
-            'subject' => 'required|in:cargo,manager,f2,f1,tr'
+        // return json
+        return json_encode([
+            'f1' => $f1,
+            'f2' => $f2,
+            'tr' => $tr,
+            'cargo_id' => $cargo_id,
+            'manager_id' => $manager_id
         ]);
-
-        if ($validator->fails()) {
-            return false;
-//            abort(400, $validator->errors()->first());
-        }
-        return true;
     }
 
-    private function parseModel(string $modelName) {
-        // get Model
-        switch ($modelName) {
-            case 'route':
-                return 'route_id';
-                break;
-            case 'carrier':
-                return 'carrier_id';
-                break;
-            case 'cargo':
-                return 'cargo_id';
-                break;
-            case 'manager':
-                return 'manager_id';
-                break;
-            case 'f2':
-                return 'f2';
-                break;
-            case 'f1':
-                return 'f1';
-                break;
-            case 'tr':
-                return 'tr';
-                break;
-            default:
-                return null;
-        }
+    private function getMostFrequency($collection, $column_name) {
+        $arr = $collection->pluck($column_name)->countBy()->toArray();
+        asort($arr);
+        return array_key_last($arr);
     }
+
 }
