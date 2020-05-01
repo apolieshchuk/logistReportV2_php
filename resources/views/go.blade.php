@@ -22,7 +22,7 @@
     <div style="display:flex; flex-direction: column; margin: 10px;">
         {{--SELECT PICKER--}}
         <div id="route-select-wrapper" style="margin-bottom: 10px;">
-            <select id="routeSelect" class="ui search dropdown" onchange="initRatio()">
+            <select id="routeSelect" class="ui search dropdown" onchange="initRatio3()">
                 <option value="" selected disabled>Оберіть маршрут</option>
                 @foreach($routes as $route)
                     <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
@@ -94,13 +94,13 @@
                     <input class="data-col data-col-f1" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
                 </div>
             </td>
-            <td class="data-col-tr"  data-label="Тр">
+            <td class="data-col data-col-tr"  data-label="Тр">
                 <select class="ui search dropdown">
                     <option value="0">НІ</option>
                     <option value="1">ТАК</option>
                 </select>
             </td>
-            <input type="hidden" class="data-col data-col-carrierId" value="{{ $auto["carrier_id"] }}">
+            <input type="hidden" class="data-col data-col-carrier-id" value="{{ $auto["carrier_id"] }}">
             <input type="hidden" class="data-col" value="{{ $auto["driver_id"] }}">
         </tr>
     @endforeach

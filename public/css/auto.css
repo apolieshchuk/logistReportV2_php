@@ -35,7 +35,7 @@ tr input[type="text"] {
     width: 120px;
     color: #333333;
     font-size: 14px;
-    font-family: Tahoma, serif;
+    /*font-family: Tahoma, serif;*/
 }
 
 input[type="text"]:focus {
