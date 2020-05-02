@@ -44,13 +44,18 @@ class ReportsController extends Controller
             Reports::firstOrCreate($report);
         }
 
+        // update route
+        Routes::find($json[0]['route_id'])->touch();
+
         return json_encode(["status" => "ok"]);
     }
 
     public function dataLoad() {
         $from = request('report_from') ?? config('constants.report_from');
         $to = request('report_to') ?? config('constants.report_to');
-        $reports = Reports::whereBetween('date', [$from, $to])->with([
+        $reports = Reports::whereBetween('date', [$from, $to])
+            ->latest()
+            ->with([
             'manager:id,surname',
             'cargo:id,name',
             'route:id,name',

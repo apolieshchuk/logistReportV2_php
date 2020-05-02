@@ -7,6 +7,15 @@ tbody tr:hover{
     cursor: pointer;
 }
 
+#filterbox {
+    width: 300px;
+}
+
+header nav input,
+header form input {
+    height: 38px !important;
+}
+
 /* Column size */
 table tr th:first-child, th:first-child input {
     width: 5px;

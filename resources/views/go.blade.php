@@ -2,7 +2,7 @@
 
 @section('head')
 
-<title>Table V01</title>
+<title>Go</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {{--MY CSS--}}
@@ -22,7 +22,7 @@
     <div style="display:flex; flex-direction: column; margin: 10px;">
         {{--SELECT PICKER--}}
         <div id="route-select-wrapper" style="margin-bottom: 10px;">
-            <select id="routeSelect" class="ui search dropdown" onchange="initRatio3()">
+            <select id="routeSelect" class="ui search dropdown" onchange="initRatio()">
                 <option value="" selected disabled>Оберіть маршрут</option>
                 @foreach($routes as $route)
                     <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
@@ -31,13 +31,13 @@
         </div>
 
         <div style="text-align: center;">
-            <select id="managerSelect" class="ui search dropdown" disabled>
+            <select id="managerSelect" class="ui search dropdown" required disabled>
                 <option value="" selected disabled >Оберіть менеджера</option>
                 @foreach($managers as $manager)
                     <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
                 @endforeach
             </select>
-            <select id="cargoSelect" class="ui search dropdown" disabled>
+            <select id="cargoSelect" class="ui search dropdown" required disabled>
                 <option value="" selected disabled>Оберіть вантаж</option>
                 @foreach($cargos as $cargo)
                     <option value="{{ $cargo['id'] }}">{{ $cargo['name'] }}</option>

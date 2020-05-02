@@ -6,6 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contacts extends Model
 {
+    protected $fillable = [
+        'surname',
+        'name',
+        'father',
+        'post_id',
+        'tel',
+        'license'
+    ];
+
     public function post() {
         return $this->belongsTo(Posts::class);
     }

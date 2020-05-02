@@ -1,6 +1,8 @@
 @extends('layout')
 
 @section('head')
+<title>Report</title>
+
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="/css/report.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
@@ -12,22 +14,39 @@
 
 @section('body')
 
-<div style="padding: 0 10px">
-    <header style="margin-bottom: 10px">
+<div style="padding: 15px 10px">
+    <header style="margin-bottom: 10px; display: flex; justify-content: space-between">
+
+        <nav style="margin-bottom: 10px; text-align: center"
+             class="navbar navbar-default" role="navigation">
+            <div style="text-align: center" class="navbar-text ui input">
+                <input style="height: 35px" type="text" id="filterbox" placeholder="Пошук">
+            </div>
+        </nav>
+
         <form action="/report" method="GET">
-            <label for="start-date">Від</label>
-            <input type="date" id="from" value="{{ request('report_from') ?? config('constants.report_from') }}" name="report_from">
-            <label for="end-date">До</label>
-            <input type="date" id="to" value="{{ request('report_to') ?? config('constants.report_to') }}" name="report_to">
-            <input type="submit">
+            <div class="ui input" style="margin-right: 10px;">
+                <label style="align-self: center; margin-right: 10px;" for="start-date">Від</label>
+                <input type="date" id="from"
+                       value="{{ request('report_from') ?? config('constants.report_from') }}"
+                       name="report_from">
+            </div>
+           <div class="ui input" style="margin-right: 10px;">
+               <label style="align-self: center; margin-right: 10px;" for="end-date">До</label>
+               <input type="date" class="ui input" id="to"
+                      value="{{Carbon\Carbon::tomorrow()->format('Y-m-d') }}"
+                      name="report_to">
+           </div>
+            <input class="ui blue button" type="submit" value="Змінити дату">
         </form>
+
+        <form action="/" >
+            <input class="ui blue button" type="submit" value="Авто">
+        </form>
+
     </header>
 
-    <nav style="margin-bottom: 10px;" class="navbar navbar-default" role="navigation">
-        <div style="text-align: center" class="navbar-text">
-            <span style="font-size: 25px">Пошук:</span> <input style="height: 25px" type="text" id="filterbox">
-        </div>
-    </nav>
+    <hr>
 
     <table id="autoTable" class="display cell-border" style="width: 100%;">
         <thead>
@@ -79,26 +98,6 @@
             <th>Замітки</th>
         </tr>
         </tfoot>
-        {{--        <tbody>--}}
-        {{--        @foreach($reports as $report)--}}
-        {{--            <tr>--}}
-        {{--                <td></td>--}}
-        {{--                <td>{{ $report->date }}</td>--}}
-        {{--                <td>{{ $report->manager->surname }}</td>--}}
-        {{--                <td>{{ $report->cargo->name }}</td>--}}
-        {{--                <td>{{ $report->route->name }}</td>--}}
-        {{--                <td>{{ $report->carrier->name }}</td>--}}
-        {{--                <td>{{ $report->auto_num }}</td>--}}
-        {{--                <td>{{ $report->trail_num }}</td>--}}
-        {{--                <td>{{ $report->driver->surname }}</td>--}}
-        {{--                <td>{{ $report->f2 }}</td>--}}
-        {{--                <td>{{ $report->f1 }}</td>--}}
-        {{--                <td>{{ $report->tr }}</td>--}}
-        {{--                <td>{{ $report->notes }}</td>--}}
-        {{--                <td style="display: none">{{ $report->id }}</td>--}}
-        {{--            </tr>--}}
-        {{--        @endforeach--}}
-        {{--        </tbody>--}}
     </table>
 </div>
 @endsection

@@ -13,10 +13,11 @@ class GoController extends Controller
 {
     public function index() {
         $auto_ids = explode(',', request()->cookie('ids'));
-        $managers = Contacts::where('post_id', Posts::where('name', 'Менеджер')->first()->id)->get();
+        $managers = Contacts::where('post_id', Posts::where('name', 'Менеджер')
+            ->first()->id)->get();
         return view('go', [
             'autos' => Autos::findMany($auto_ids),
-            'routes' => Routes::all(),
+            'routes' => Routes::orderBy('updated_at', 'desc')->orderBy('name', 'asc')->get(),
             'managers' => $managers,
             'cargos' => Cargos::all()
         ]);

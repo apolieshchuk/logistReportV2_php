@@ -5,7 +5,7 @@ window.onload = function(){
     });
 }
 
-async function initRatio3() {
+async function initRatio() {
     const route_id = $('#routeSelect').val();
 
     try {
@@ -68,8 +68,6 @@ function sendReport() {
         autos.push(rowData)
     });
 
-    console.log(autos)
-
     // pack request post data
     const data = [];
     autos.forEach((auto) => {
@@ -99,8 +97,8 @@ function sendReport() {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
         },
         success: function (res) {
-            console.log(JSON.stringify(data));
-            console.log(res);
+            // console.log(JSON.stringify(data));
+            // console.log(res);
             alert("Авто відправлено на маршрут")
             window.location = '/';
         },

@@ -1,3 +1,9 @@
+// MODAL
+function showModal() {
+    $('.ui.modal').modal({
+        autofocus:false
+    }).modal('show');
+}
 
 // Copy selected rows
 function copyAutos() {
@@ -24,7 +30,7 @@ function copyAutos() {
 
     // copy to clipbord
     copyToClipboard(logText);
-};
+}
 
 function getSelectedRows() {
     let table = $('#autoTable').DataTable();
@@ -42,8 +48,23 @@ function copyToClipboard(text) {
 
 // clear checked
 $('#clearButton').click(function () {
+
+    const table = $("#autoTable").DataTable();
+
+    // clear main input and search buttons
+    table
+        .search( '' )
+        .columns().search( '' )
+        .draw();
+
+    // clear columns inputs
+    $('.column_search').each(function(i) {
+        $(this).val("");
+    });
+    $('#filterbox').val("");
+
     // uncheked all
-    $('#autoTable').DataTable().rows().deselect();
+    table.rows().deselect();
 })
 
 // Go authos, GO!
@@ -106,20 +127,6 @@ $(document).ready(function() {
         // deferRender: true,
     });
 
-
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
-
-        $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
-
     // move filter box outside table
     $("#filterbox").keyup(function() {
         table.search(this.value).draw();
@@ -132,10 +139,36 @@ $(document).ready(function() {
             .search( this.value )
             .draw();
     } );
+
+    // Apply the search
+    // table.columns().every( function () {
+    //     var that = this;
+    //
+    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //         if ( that.search() !== this.value ) {
+    //             that
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
 } )
 
 // For fast table load
 window.onload = function() {
+    // dropdown
+    $('.ui.dropdown').dropdown({
+        fullTextSearch: true,
+        // showOnFocus: false
+        // selectOnBlur: false,
+    });
+
+    // input masks
+    $('#licenseInput').inputmask({"mask": "Посв AAA № 999999"});
+    $('#autoNumInput, #trailNumInput', ).inputmask({"mask": "AA 99-99 AA"});
+    $('#telInput').inputmask({"mask": "099-99-99-999"});
+
+    // $(selector).inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax
     // change autoTable vision
     // document.getElementById("autoTable").style.display = 'block';
 };

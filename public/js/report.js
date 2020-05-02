@@ -54,18 +54,11 @@ $(document).ready(function() {
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
         // bPaginate: false,
-        columnDefs: [
-            {
-                orderable: false,
-                className: 'select-checkbox',
-                targets:   0,
-            }
-        ],
         select: {
             style:    'multi',
             // selector: 'td:first-child'
         },
-        order: [[ 1, 'asc' ]],
+        // order: [[ 1, 'desc' ]],
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
@@ -84,7 +77,19 @@ $(document).ready(function() {
             {data: 'f1'},
             {data: 'tr'},
             {data: 'notes'},
-        ]
+        ],
+        columnDefs: [
+            {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0,
+            },
+            { targets : [11],
+                render : function (data, type, row) {
+                    return data === '1' ? 'так' : 'ні'
+                }
+            }
+        ],
     });
 
     // Setup - add a text input to each footer cell

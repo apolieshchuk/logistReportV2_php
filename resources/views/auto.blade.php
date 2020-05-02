@@ -1,16 +1,30 @@
 @extends('layout')
 
 @section('head')
+<title>Autos</title>
+
+{{--DATATABLES--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 <link rel="stylesheet" href="/css/auto.css">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
 
+{{--SOME ICONS AND FONTS --}}
+{{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">--}}
+{{--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--}}
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">--}}
+
 {{--SEMANTIC--}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.css"/>
+
+{{--BOOTSTRAP--}}
+{{--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">--}}
 
 {{--SEMANTIC UI / DATA TABLES--}}
 {{--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.1/semantic.min.css"/>--}}
 {{--<link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.semanticui.min.css"/>--}}
+
+{{--    FONT AWESOME--}}
+{{--<script src="https://kit.fontawesome.com/b437789619.js" crossorigin="anonymous"></script>--}}
 
 <meta name="csrf_token" content="{{ csrf_token() }}" />
 @endsection
@@ -18,24 +32,23 @@
 @section('body')
 
 <div style="padding: 0 10px; display: flex; flex-direction: column">
-{{--    <header style="margin-bottom: 10px; display: flex; justify-content: center">--}}
-{{--        <button class="ui teal button" id="clearButton">Очистити</button>--}}
-{{--        <button class="ui teal button" id="copyButton">Копіювати</button>--}}
-{{--        <button class="ui teal button" id="goButton">Відправити</button>--}}
-{{--        <form action="/report"><input class="ui teal button" type="submit" value="Звіт"></form>--}}
-{{--    </header>--}}
     <div
-        style="margin-bottom: 10px; width: 500px; align-self: center; margin-top: 10px"
-        class="four ui buttons" >
-        <button class="ui blue button" id="clearButton">Очистити</button>
-        <button class="ui blue button" id="copyButton" onclick="copyAutos()">Копіювати</button>
-        <button class="ui blue button" id="goButton">Відправити</button>
-        <form action="/report">
-            <input style="border-bottom-left-radius: 0; border-top-left-radius: 0"
-                   class="ui blue button" type="submit" value="Звіт">
-        </form>
+        style="margin-bottom: 10px; width: 750px; align-self: center; margin-top: 10px"
+        class="five ui buttons" >
+        <button class="ui blue button" onclick="showModal()" id="addAutoButton">
+            <i class="plus circle icon"></i> Додати
+        </button>
+        <button class="ui blue button" id="clearButton">
+            <i class="erase icon"></i>Очистити</button>
+        <button class="ui blue button" id="copyButton" onclick="copyAutos()">
+            <i class="copy outline icon"></i>Копіювати</button>
+        <button class="ui blue button" id="goButton">
+            <i class="share icon"></i>Відправити</button>
+        <button class="ui blue button" onclick="location='/report'" id="reportButton">
+            <i class="list icon"></i>Звіт</button>
     </div>
-    <nav style="margin-bottom: 10px; text-align: center" class="navbar navbar-default" role="navigation">
+    <nav style="margin-bottom: 10px; text-align: center;"
+         class="navbar navbar-default" role="navigation">
         <div style="text-align: center" class="navbar-text ui input">
             <input style="height: 35px" type="text" id="filterbox" placeholder="Пошук">
         </div>
@@ -87,6 +100,83 @@
         </tfoot>
     </table>
 </div>
+
+{{--MODAL--}}
+<div class="ui modal"
+style="padding: 0 20px 20px 20px; width: 500px">
+    <i class="close icon"></i>
+    <div class="header">
+        Додати авто
+    </div>
+    <form class="ui form" method="POST" action="/">
+        @csrf
+        <h4 class="ui dividing header">Автомобіль</h4>
+        <div class="field">
+            <label>Перевізник</label>
+            <div class="two fields">
+                <div class="fourteen wide field">
+                    <select name='carrier_id' id="carrierSelect" class="ui search dropdown">
+                        <option value="" selected disabled>Перевізник</option>
+                        @foreach($carriers as $carrier)
+                            <option value="{{ $carrier['id'] }}">{{ $carrier['name'] }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="two wide field">
+                    <i class="plus square icon"
+                       style="font-size:36px; color:#2185d0; cursor: pointer"></i>
+                </div>
+                {{--            <input type="text" name="carrier" placeholder="Перевізник">--}}
+            </div>
+        </div>
+        <div class="field">
+            <label>Авто</label>
+            <div class="three fields">
+                <div class="field">
+                    <input type="text" name="mark" placeholder="Марка авто">
+                </div>
+                <div class="field">
+                    <input id="autoNumInput" type="text" name="auto_num" placeholder="Номер авто">
+                </div>
+                <div class="field">
+                    <input id="trailNumInput" type="text" name="train_num" placeholder="Номер причепу">
+                </div>
+            </div>
+        </div>
+        <h4 class="ui dividing header">Водій</h4>
+        <div class="field">
+            <label>ПІБ</label>
+            <div class="three fields">
+                <div class="field">
+                    <input type="text" name="dr_surn" placeholder="Прізвище">
+                </div>
+                <div class="field">
+                    <input type="text" name="dr_name" placeholder="Ім`я">
+                </div>
+                <div class="field">
+                    <input type="text" name="dr_father" placeholder="По-батькові">
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label>Додаткова інформація</label>
+            <div class="two fields">
+                <div class="field">
+                    <input id="licenseInput" type="text" name="license" placeholder="Посвідчення">
+                </div>
+                <div class="field">
+                    <input id="telInput" type="text" name="tel" placeholder="Телефон">
+                </div>
+            </div>
+            <div class="field">
+                <input id="notesInput" type="text" name="notes" placeholder="Замітки">
+            </div>
+        </div>
+        <div class="field" style="text-align: center">
+            <input type="submit" class="ui blue button" value="Додати авто" style="margin: auto">
+        </div>
+    </form>
+</div>
 @endsection
 
 @section('footer')
@@ -108,6 +198,10 @@
 {{--<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>--}}
 {{--<script src="https://cdn.datatables.net/1.10.20/js/dataTables.semanticui.min.js"></script>--}}
 
+{{--BOOTSTRAP--}}
+{{--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>--}}
 
+{{--    INPUT MASK--}}
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 @endsection
 
