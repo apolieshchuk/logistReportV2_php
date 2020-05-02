@@ -3,6 +3,10 @@ header {
     text-align: center;
 }
 
+form{
+    align-self: center;
+}
+
 tbody tr:hover{
     cursor: pointer;
 }
@@ -87,3 +91,46 @@ input[type="text"]:focus {
     color: #333333;
     border: 1px solid #00b5ad
 }
+
+@media screen and (max-width: 800px) {
+    header {
+        flex-direction: column;
+    }
+
+    form input[type=date] {
+        font-size: 11px !important;
+        width: 120px;
+    }
+
+    nav {
+        margin-bottom: 5px !important;
+    }
+
+    form button span {
+        display: none;
+    }
+
+    form button {
+        margin: 0 0 5px 0 !important;
+        padding: 1px 1px 1px 12px !important;
+
+        width: 40px;
+    }
+
+    form button i:before {
+        font-size: 18px;
+    }
+
+    #autoButton {
+        /*margin-top: 5px;*/
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 980px) {
+
+    form button span {
+        display: none;
+    }
+}
+

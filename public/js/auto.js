@@ -87,12 +87,6 @@ $('#goButton').click(function () {
 
 // data-tables functions
 $(document).ready(function() {
-    // Setup - add a text input to each footer cell
-    $('#autoTable thead tr:eq(1) th').each( function () {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
-    } );
-
     // DataTable
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
@@ -123,23 +117,18 @@ $(document).ready(function() {
         fixedHeader: true,
         pageLength: 10,
         scrollX: true,
-        // deferRender: true,
-        // movepagination out table
-        // initComplete: (settings, json)=>{
-        //     $('.dataTables_paginate').appendTo('#pagination');
-        // },
     });
-    //
-    // $("#pagination").ready(function(){
-    //     $("#autoTable_paginate").appendTo($("#pagination"));
-    // });
+
+    // Setup - add a text input to each footer cell
+    $('#autoTable thead tr:eq(1) th').each( function () {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
+    } );
 
     // move filter box outside table
     $("#filterbox").keyup(function() {
         table.search(this.value).draw();
     });
-
-
 
     // filters under columns
     $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {

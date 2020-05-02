@@ -18,7 +18,6 @@ function getSelectedRows() {
     return autos;
 }
 
-
 // clear checked
 $('#clearButton').click(function () {
     // uncheked all
@@ -48,8 +47,6 @@ $('#goButton').click(function () {
 
 // data-tables functions
 $(document).ready(function() {
-    const urlParams = new URLSearchParams(window.location.search);
-
     // DataTable
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
@@ -71,7 +68,7 @@ $(document).ready(function() {
             {data: 'route.name'},
             {data: 'carrier.name'},
             {data: 'auto_num'},
-            {data: 'trail_num'},
+            // {data: 'trail_num'},
             {data: 'driver.surname'},
             {data: 'f2'},
             {data: 'f1'},
@@ -84,12 +81,13 @@ $(document).ready(function() {
                 className: 'select-checkbox',
                 targets:   0,
             },
-            { targets : [11],
+            { targets : [10],
                 render : function (data, type, row) {
                     return data === '1' ? 'так' : 'ні'
                 }
             }
         ],
+        // scrollX: true,
     });
 
     // Setup - add a text input to each footer cell
@@ -98,31 +96,32 @@ $(document).ready(function() {
         $(this).html( '<input type="text" placeholder="Search '+title+'" class="column_search" />' );
     } );
 
-    // Apply the search
-    table.columns().every( function () {
-        var that = this;
-
-        $( 'input', this.footer() ).on( 'keyup change clear', function () {
-            if ( that.search() !== this.value ) {
-                that
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
-
     // move filter box outside table
     $("#filterbox").keyup(function() {
         table.search(this.value).draw();
     });
 
     // filters under columns
-    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
+    $( "#autoTable tfoot input"  ).on( 'keyup', ".column_search",function () {
         table
             .column( $(this).parent().index() )
             .search( this.value )
             .draw();
     } );
+
+    // Apply the search
+    // table.columns().every( function () {
+    //     var that = this;
+    //
+    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
+    //         if ( that.search() !== this.value ) {
+    //             that
+    //                 .search( this.value )
+    //                 .draw();
+    //         }
+    //     } );
+    // } );
+
 } )
 
 // For fast table load
