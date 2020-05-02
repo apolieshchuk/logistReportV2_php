@@ -97,8 +97,22 @@ function sendReport() {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
         },
         success: function (res) {
-            // console.log(JSON.stringify(data));
-            // console.log(res);
+            // console.log(JSON.parse(res));
+            res = JSON.parse(res);
+
+            //copy to clipboard todo together with prev copy
+            let textForCopy = ""
+            textForCopy += `${res[0]['date']} ${res[0]['route']} \n\n`
+            res.forEach(function(report) {
+                textForCopy += `${report['num']}) `+
+                    `${report['carrier']} ` +
+                    `${report['auto_num']} ` +
+                    `${report['trail_num']} ` +
+                    `${report['tel']} ` +
+                    `${report['license']} \n`
+            })
+            copyToClipboard(textForCopy);
+
             alert("Авто відправлено на маршрут")
             window.location = '/';
         },
@@ -107,4 +121,13 @@ function sendReport() {
             alert("Помилка при додаванні авто на маршрут\n" + err.message)
         },
     })
+}
+
+function copyToClipboard(text) {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
 }

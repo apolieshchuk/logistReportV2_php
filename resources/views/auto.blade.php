@@ -7,7 +7,7 @@
 
 {{--DATATABLES--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="/css/auto.css">
+<link rel="stylesheet" href="/css/auto.css?{{ time() }}">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
 
 {{--SOME ICONS AND FONTS --}}
@@ -33,22 +33,24 @@
 
 @section('body')
 
-<div style="padding: 0 10px; display: flex; flex-direction: column; overflow: auto">
-    <div
-        style="margin-bottom: 10px; width: 750px; align-self: center; margin-top: 10px"
+<div style="padding: 0 10px; display: flex; flex-direction: column;">
+{{--    HEADER MENU--}}
+    <div id="header-menu"
+        style="margin-bottom: 10px; width: 800px; align-self: center; margin-top: 10px;"
         class="five ui buttons" >
         <button class="ui blue button" onclick="showModal()" id="addAutoButton">
-            <i class="plus circle icon"></i> Додати
+            <i class="plus circle icon" style="font-size:24px"></i> <span>Додати</span>
         </button>
         <button class="ui blue button" id="clearButton">
-            <i class="erase icon"></i>Очистити</button>
+            <i class="erase icon" style="font-size:24px"></i><span>Очистити</span></button>
         <button class="ui blue button" id="copyButton" onclick="copyAutos()">
-            <i class="copy outline icon"></i>Копіювати</button>
+            <i class="copy outline icon" style="font-size:24px"></i><span>Копіювати</span></button>
         <button class="ui blue button" id="goButton">
-            <i class="share icon"></i>Відправити</button>
+            <i class="share icon" style="font-size:24px"></i><span>Відправити</span></button>
         <button class="ui blue button" onclick="location='/report'" id="reportButton">
-            <i class="list icon"></i>Звіт</button>
+            <i class="list icon" style="font-size:24px"></i><span>Звіт</span></button>
     </div>
+{{--    SEARCH INPUT--}}
     <nav style="margin-bottom: 10px; text-align: center;"
          class="navbar navbar-default" role="navigation">
         <div style="text-align: center" class="navbar-text ui input">
@@ -56,6 +58,7 @@
         </div>
     </nav>
     <hr style="width: 100%; height: 1px">
+{{--    MAIN TABLE--}}
     <table id="autoTable" class="display cell-border" style="width:100%;">
         <thead>
         <tr>
@@ -69,7 +72,7 @@
             <th>По-батьк</th>
             <th>Тел</th>
             <th>Посвідчення</th>
-{{--            <th style="display: none">id</th>--}}
+            {{--            <th style="display: none">id</th>--}}
         </tr>
         <tr id="filter-col">
             <th></th>
@@ -82,7 +85,7 @@
             <th></th>
             <th></th>
             <th></th>
-{{--            <th style="display: none">id</th>--}}
+            {{--            <th style="display: none">id</th>--}}
         </tr>
         </thead>
         <tfoot>
@@ -97,7 +100,7 @@
             <th>По-батьк</th>
             <th>Тел</th>
             <th>Посвідчення</th>
-{{--            <th style="display: none">id</th>--}}
+            {{--            <th style="display: none">id</th>--}}
         </tr>
         </tfoot>
     </table>
@@ -187,7 +190,7 @@ style="padding: 0 20px 20px 20px; width: 500px">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 {{--MY STYLE--}}
-<script src="/js/auto.js"></script>
+<script src="/js/auto.js?{{ time() }}"></script>
 
 {{--DATATABLES--}}
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>

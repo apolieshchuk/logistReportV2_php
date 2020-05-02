@@ -28,6 +28,11 @@ tfoot input {
     width: 500px;
 }
 
+buttons i:before {
+    margin-top: 3px;
+}
+
+
 #filter-col th:first-child input{
     display: none;
 }
@@ -111,18 +116,21 @@ table.dataTable thead th {
     display: none;
 }
 
+@media screen and (max-width: 800px) {
+    #filterbox {
+        width: 300px;
+    }
 
-/*input[type="text"] {*/
-/*    border: 1px solid #cccccc; //цвет рамки*/
-/*border-radius: 3px; //закругление углов (общее)*/
-/*-webkit-border-radius: 3px; //закругление углов (Google Chrome)*/
-/*-moz-border-radius: 3px; //закругление углов (FireFox)*/
-/*-khtml-border-radius: 3px; //закругление углов (Safari)*/
-/*background: #ffffff !important; // желательно прописывать, так как в Chrome при сохранных данных оно может быть желтым*/
-/*outline: none; // удаляет обводку в браузерах хром(желтая) и сафари(синяя)*/
-/*height: 24px; // высота на свое усмотрение*/
-/*width: 120px; // ширина на свое усмотрение*/
-/*color: black; //цвет шрифта в обычном состоянии*/
-/*font-size: 6px !important; // Размер шрифта*/
-/*font-family: Tahoma; // Стиль шрифта*/
-/*}*/
+    #header-menu {
+        width: 100% !important;
+        height: 38px;
+    }
+
+    #addAutoButton span,
+    #clearButton span,
+    #goButton span,
+    #reportButton span,
+    #copyButton{
+        display: none;
+    }
+}

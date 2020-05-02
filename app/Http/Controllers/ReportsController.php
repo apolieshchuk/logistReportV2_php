@@ -40,14 +40,26 @@ class ReportsController extends Controller
         }
 
         // insert data
-        foreach ($json as $report) {
-            Reports::firstOrCreate($report);
+        $createdReports = [];
+        foreach ($json as $key => $report) {
+            $item = Reports::firstOrCreate($report);
+            $item = [
+                'num' => $key + 1,
+                'date' => $item['date'],
+                'route' => Routes::find($item['route_id'])->name,
+                'carrier' => Carriers::find($item['carrier_id'])->name,
+                'auto_num' => $item['auto_num'],
+                'trail_num' => $item['trail_num'],
+                'tel' => Contacts::find($item['driver_id'])->tel,
+                'license' => Contacts::find($item['driver_id'])->license,
+            ];
+            array_push($createdReports, $item);
         }
 
         // update route
         Routes::find($json[0]['route_id'])->touch();
 
-        return json_encode(["status" => "ok"]);
+        return json_encode($createdReports);
     }
 
     public function dataLoad() {

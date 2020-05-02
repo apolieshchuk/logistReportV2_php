@@ -11,8 +11,6 @@ function copyAutos() {
     let autos = getSelectedRows();
     if (autos.length === 0) return;
 
-    // console.log(autos);
-
     // Form strings
     let logText = "";
     for (let i = 0; i < autos.length; i++) {
@@ -124,13 +122,24 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
+        scrollX: true,
         // deferRender: true,
+        // movepagination out table
+        // initComplete: (settings, json)=>{
+        //     $('.dataTables_paginate').appendTo('#pagination');
+        // },
     });
+    //
+    // $("#pagination").ready(function(){
+    //     $("#autoTable_paginate").appendTo($("#pagination"));
+    // });
 
     // move filter box outside table
     $("#filterbox").keyup(function() {
         table.search(this.value).draw();
     });
+
+
 
     // filters under columns
     $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
@@ -168,7 +177,6 @@ window.onload = function() {
     $('#autoNumInput, #trailNumInput', ).inputmask({"mask": "AA 99-99 AA"});
     $('#telInput').inputmask({"mask": "099-99-99-999"});
 
-    // $(selector).inputmask("9-a{1,3}9{1,3}"); //mask with dynamic syntax
-    // change autoTable vision
-    // document.getElementById("autoTable").style.display = 'block';
+    // move pagination
+    // var element = $('#childNode').detach();
 };

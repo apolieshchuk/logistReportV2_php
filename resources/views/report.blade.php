@@ -4,7 +4,7 @@
 <title>Report</title>
 
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
-<link rel="stylesheet" href="/css/report.css">
+<link rel="stylesheet" href="/css/report.css?{{ time() }}">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
 
 {{--SEMANTIC--}}
@@ -34,7 +34,7 @@
            <div class="ui input" style="margin-right: 10px;">
                <label style="align-self: center; margin-right: 10px;" for="end-date">До</label>
                <input type="date" class="ui input" id="to"
-                      value="{{Carbon\Carbon::tomorrow()->format('Y-m-d') }}"
+                      value="{{ request('report_to') ?? Carbon\Carbon::tomorrow()->format('Y-m-d') }}"
                       name="report_to">
            </div>
             <input class="ui blue button" type="submit" value="Змінити дату">
@@ -102,7 +102,7 @@
 
 @section('footer')
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script src="/js/report.js"></script>
+<script src="/js/report.js?{{ time() }}"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
 
