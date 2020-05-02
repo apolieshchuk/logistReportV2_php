@@ -40,9 +40,7 @@
             <input class="ui blue button" type="submit" value="Змінити дату">
         </form>
 
-        <form action="/" >
-            <input class="ui blue button" type="submit" value="Авто">
-        </form>
+        <a href="/" class="ui blue button">Авто</a>
 
     </header>
 

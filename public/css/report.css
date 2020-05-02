@@ -12,7 +12,8 @@ tbody tr:hover{
 }
 
 header nav input,
-header form input {
+header form input,
+header a {
     height: 38px !important;
 }
 

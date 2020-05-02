@@ -2,6 +2,8 @@
 
 @section('head')
 <title>Autos</title>
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
 {{--DATATABLES--}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
@@ -31,7 +33,7 @@
 
 @section('body')
 
-<div style="padding: 0 10px; display: flex; flex-direction: column">
+<div style="padding: 0 10px; display: flex; flex-direction: column; overflow: auto">
     <div
         style="margin-bottom: 10px; width: 750px; align-self: center; margin-top: 10px"
         class="five ui buttons" >

@@ -4,7 +4,7 @@
 
 <title>Go</title>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 {{--MY CSS--}}
 <link rel="stylesheet" href="/css/go.css">
 {{--BOOTSTRAP--}}
@@ -19,6 +19,9 @@
 @section('body')
 
 <div style="display: flex; justify-content: center">
+
+    <a style="height: 38px; align-self: center" href="/" class="ui blue button">Авто</a>
+
     <div style="display:flex; flex-direction: column; margin: 10px;">
         {{--SELECT PICKER--}}
         <div id="route-select-wrapper" style="margin-bottom: 10px;">

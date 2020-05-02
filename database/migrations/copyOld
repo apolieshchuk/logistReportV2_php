@@ -1,1 +1,2 @@
 mysqldump --user=root --password=Fleep123 aipx_logrep reptable_old | mysql --user=root --password=Fleep123 logist
+CREATE TABLE db1.table1 SELECT * FROM db2.table1
