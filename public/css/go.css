@@ -9,6 +9,10 @@ input[type='date'] {
     width: 140px;
 }
 
+#mobileButtons {
+    display: none;
+}
+
 /*SELECT ROUTE BUTTON*/
 #route-select-wrapper .search:first-child {
     width: 395px;
@@ -26,6 +30,86 @@ input[type='date'] {
     min-width: 100px !important;
     max-width: 100px !important;
 }
+
+@media screen and (max-width: 800px) {
+
+    /*SELECT ROUTE BUTTON*/
+    #route-select-wrapper .search:first-child {
+        width: 300px;
+    }
+
+    #route-select-wrapper{
+        margin-left: 40px;
+    }
+
+    #infoPicker .search {
+        width: 180px !important;
+        min-width: 0 !important;
+    }
+
+    #goButton1, #autoButton1 {
+        display: none;
+    }
+
+    #mobileButtons {
+        /*margin-top: 5px;*/
+        display: flex;
+    }
+
+    #table-wrapper tbody tr
+    {
+        display: table-row !important;
+        /*width: 80px !important;*/
+        /*display: flex !important;*/
+    }
+
+    #table-wrapper thead tr {
+        /*width: 180px !important;*/
+        /*display: flex !important;*/
+        display: flex !important;
+        justify-content: space-between;
+    }
+
+    #table-wrapper thead tr th {
+        width: 0 !important;
+    }
+
+    /*carrier*/
+    #table-wrapper thead tr th:nth-child(2) {
+        margin-left: -50px;
+        margin-right: 50px;
+    }
+
+    /* f2 */
+    #table-wrapper thead tr th:nth-child(6) {
+        /*margin-left: -50px;*/
+        /*margin-right: 100px;*/
+    }
+
+
+    #table-wrapper tbody tr td,
+    #table-wrapper tbody tr td input{
+        display: table-cell !important;
+        width: 120px !important;
+        /*display: flex !important;*/
+    }
+
+    /*// hide trail*/
+    #table-wrapper thead tr th:nth-child(4),
+    #table-wrapper tbody tr td:nth-child(4){
+        display: none !important;
+    }
+
+    /*table {*/
+    /*    min-width: auto;*/
+    /*    flex-wrap: nowrap;*/
+    /*}*/
+
+    #table-wrapper {
+        overflow: auto;
+    }
+}
+
 /*table th {*/
 /*    width: auto !important;*/
 /*}*/

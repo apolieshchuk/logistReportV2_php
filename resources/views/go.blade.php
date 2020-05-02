@@ -4,6 +4,8 @@
 
 <title>Go</title>
 <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 
 {{--MY CSS--}}
 <link rel="stylesheet" href="/css/go.css?{{ time() }}">
@@ -20,10 +22,11 @@
 
 <div style="display: flex; justify-content: center">
 
-    <a style="height: 38px; align-self: center" href="/" class="ui blue button">Авто</a>
+    <a style="height: 38px; align-self: center" href="/" class="ui blue button" id="autoButton1">Авто</a>
 
-    <div style="display:flex; flex-direction: column; margin: 10px;">
-        {{--SELECT PICKER--}}
+    {{--SELECT PICKERS--}}
+    <div id="#selectPickers" style="display:flex; flex-direction: column; margin: 10px;">
+{{--        ROUTE PICKER--}}
         <div id="route-select-wrapper" style="margin-bottom: 10px;">
             <select id="routeSelect" class="ui search dropdown" onchange="initRatio()">
                 <option value="" selected disabled>Оберіть маршрут</option>
@@ -32,9 +35,9 @@
                 @endforeach
             </select>
         </div>
-
-        <div style="text-align: center;">
-            <select id="managerSelect" class="ui search dropdown" required disabled>
+{{--        INFO PICKER--}}
+        <div id="infoPicker" style="text-align: center; margin-bottom: 10px">
+            <select id="managerSelect" class="ui search dropdown" style="margin-bottom: 10px" required disabled>
                 <option value="" selected disabled >Оберіть менеджера</option>
                 @foreach($managers as $manager)
                     <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
@@ -47,11 +50,23 @@
                 @endforeach
             </select>
         </div>
+        <div id="mobileButtons" class="ui grid" >
+            <div class="eight wide column">
+                <a style="height: 38px; width: 100%; align-self: center" href="/"
+                   class="ui blue button" id="autoButton2">Авто</a>
+            </div>
+            <div class="eight wide column">
+                <button
+                    onclick="sendReport()"
+                    style="align-self: center; height: 38px; width: 100%;" class="ui blue button" id="goButton2"
+                >Відправити</button>
+            </div>
+        </div>
     </div>
 
     <button
         onclick="sendReport()"
-        style="align-self: center" class="ui blue button" id="goButton2"
+        style="align-self: center" class="ui blue button" id="goButton1"
     >Відправити</button>
 </div>
 
@@ -59,9 +74,10 @@
 <hr style="margin-bottom: 20px;">
 
 {{--MAIN TABLE--}}
-{{--TODO MOBILE VERSION--}}
-<table class="ui celled table" style="width: 80%; margin: auto; min-width: 800px">
-    <thead>
+<div id="table-wrapper">
+    <table class="ui celled table"
+           style="white-space:nowrap; width: 100%; margin: auto; min-width: 800px">
+        <thead>
         <tr>
             <th>#</th>
             <th class="three wide">Перевізник</th>
@@ -73,42 +89,44 @@
             <th class="two wide" style="min-width: 80px">Ф1</th>
             <th class="one wide" style="min-width: 80px">Тр</th>
         </tr>
-    </thead>
-    <tbody>
-    @foreach($autos as $key => $auto)
-        <tr class="data-row">
-            <td class="data-col" data-label="#">{{ $key + 1 }}</td>
-            <td class="data-col" data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
-            <td class="data-col" data-label="Авто"> {{ $auto['auto_num'] }}</td>
-            <td class="data-col" data-label="Причіп"> {{ $auto['trail_num'] }}</td>
-            <td class="data-col" data-label="Водій"> {{ $auto->driver->surname }}</td>
-            <td data-label="Дата">
-                <div class="ui input" >
-                    <input class="data-col" style="padding-right: 2px;padding-left: 2px" type="date" value="{{Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
-                </div>
-            </td>
-            <td data-label="Ф2">
-                <div class="ui input" style="padding: 2px" >
-                    <input class="data-col data-col-f2" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
-                </div>
-            </td>
-            <td data-label="Ф1">
-                <div class="ui input">
-                    <input class="data-col data-col-f1" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
-                </div>
-            </td>
-            <td class="data-col data-col-tr"  data-label="Тр">
-                <select class="ui search dropdown">
-                    <option value="0">НІ</option>
-                    <option value="1">ТАК</option>
-                </select>
-            </td>
-            <input type="hidden" class="data-col data-col-carrier-id" value="{{ $auto["carrier_id"] }}">
-            <input type="hidden" class="data-col" value="{{ $auto["driver_id"] }}">
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+        @foreach($autos as $key => $auto)
+            <tr class="data-row">
+                <td class="data-col" data-label="#">{{ $key + 1 }}</td>
+                <td class="data-col" data-label="Перевізник"> {{ $auto->carrier['name'] }}</td>
+                <td class="data-col" data-label="Авто"> {{ $auto['auto_num'] }}</td>
+                <td class="data-col" data-label="Причіп"> {{ $auto['trail_num'] }}</td>
+                <td class="data-col" data-label="Водій"> {{ $auto->driver->surname }}</td>
+                <td data-label="Дата">
+                    <div class="ui input" >
+                        <input class="data-col" style="padding-right: 2px;padding-left: 2px" type="date" value="{{Carbon\Carbon::tomorrow()->format('Y-m-d') }}">
+                    </div>
+                </td>
+                <td data-label="Ф2">
+                    <div class="ui input" style="padding: 2px" >
+                        <input class="data-col data-col-f2" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
+                    </div>
+                </td>
+                <td data-label="Ф1">
+                    <div class="ui input">
+                        <input class="data-col data-col-f1" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
+                    </div>
+                </td>
+                <td class="data-col data-col-tr"  data-label="Тр">
+                    <select class="ui search dropdown">
+                        <option value="0">НІ</option>
+                        <option value="1">ТАК</option>
+                    </select>
+                </td>
+                <input type="hidden" class="data-col data-col-carrier-id" value="{{ $auto["carrier_id"] }}">
+                <input type="hidden" class="data-col" value="{{ $auto["driver_id"] }}">
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+</div>
+
 
 @endsection
 
