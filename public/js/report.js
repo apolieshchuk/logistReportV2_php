@@ -1,22 +1,3 @@
-const NUM_OF_COLUMNS = 10; // and id as last col
-
-function getSelectedRows() {
-    let table = $('#autoTable').DataTable();
-    // objects
-    let data = table.rows( { selected: true }).data();
-
-    // move from objects to array
-    let autos = [];
-    for (let row = 0; row < data.length; row++){
-        let auto = [];
-        auto.push(row + 1 + ")");
-        for (let col = 1; col < NUM_OF_COLUMNS + 1; col++) {
-            auto.push(data[row][col]);
-        }
-        autos.push(auto);
-    }
-    return autos;
-}
 
 // clear checked
 $('#clearButton').click(function () {
@@ -33,7 +14,7 @@ $('#goButton').click(function () {
 
     // get selected id's
     const ids = autos.map( (auto) => {
-       return auto.pop();
+        return auto.pop();
     });
 
     // console.log({ 'autos': autos});
@@ -102,7 +83,7 @@ $(document).ready(function() {
     });
 
     // filters under columns
-    $( "#autoTable tfoot input"  ).on( 'keyup', ".column_search",function () {
+    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
         table
             .column( $(this).parent().index() )
             .search( this.value )
@@ -129,4 +110,3 @@ window.onload = function() {
     // change autoTable vision
     // document.getElementById("autoTable").style.display = 'block';
 };
-
