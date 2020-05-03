@@ -1,19 +1,95 @@
-// MODAL
-function showModalAuto() {
-    $('.ui.modal').modal({
-        autofocus:false
+// MODALS
+function showModalAdd() {
+    $('#modalAdd').modal({
+        autofocus:false,
+        onHide: function () {
+            $('.modal-error-box').remove();
+            addCarrierSelect(this);
+            document.getElementById("modalAdd_form").reset();
+        },
+        onShow: function () {
+            // dropdown
+            $('.ui.dropdown').dropdown({
+                fullTextSearch: true,
+                // showOnFocus: false
+                // selectOnBlur: false,
+            });
+        }
     }).modal('show');
 }
-// function showModalCarrier() {
-//     $('.mini.modal')
-//         .modal('show')
-//     ;
-// }
+
+function showModalUpdate(id) {
+    // change active modal action
+    $('#modalUpdate_form').attr('action',`/autos/${id}`)
+
+    // ajax request for get id data
+    $.ajax({
+        url: `/autos/${id}`,
+        contentType: 'application/json',
+        success: function (res) {
+            // console.log(res);
+
+            // fill inputs data
+            $('#modalUpdate-carrier-select').val(res.carrier_id).change();
+            $('#modalUpdate-mark-input').val(res.mark);
+            $('#modalUpdate-auto-num-input').val(res.auto_num);
+            $('#modalUpdate-trail-num-input').val(res.trail_num);
+            $('#modalUpdate-surname-input').val(res.driver['surname']);
+            $('#modalUpdate-name-input').val(res.driver['name']);
+            $('#modalUpdate-father-input').val(res.driver['father']);
+            $('#modalUpdate-license-input').val(res.driver['license']);
+            $('#modalUpdate-tel-input').val(res.driver['tel']);
+            $('#modalUpdate-notes-input').val(res.notes);
+        }
+    })
+
+    // show modal
+    $('#modalUpdate').modal({
+        autofocus:false,
+        onHide: function () {
+            $('.modal-error-box').remove();
+            addCarrierSelect(this);
+            document.getElementById("modalUpdate_form").reset();
+        },
+        onShow: function () {
+            // dropdown
+            $('.ui.dropdown').dropdown({
+                fullTextSearch: true,
+                // showOnFocus: false
+                // selectOnBlur: false,
+            });
+        }
+    }).modal('show');
+}
+
+// todo universe function for show modals
+function showModal(modal) {
+    $(modal).modal({
+        autofocus:false,
+        onHide: function () {
+            addCarrierSelect(this);
+            document.getElementById("modalAdd_form").reset();
+        },
+        onShow: function () {
+            // dropdown
+            $('.ui.dropdown').dropdown({
+                fullTextSearch: true,
+                // showOnFocus: false
+                // selectOnBlur: false,
+            });
+        }
+    }).modal('show');
+}
 
 // add new carrier
-function addCarrier() {
+var modalSelectField;
+var modalAddCarrierButton;
+function addCarrierInputs(element) {
+    // modal field element for adding
+    const modalFieldForChange = $(element).parent().parent();
+
     // add new divs
-    $('#modal-carrier').append(
+    modalFieldForChange.append(
         '<div class="eight wide field">' +
         '   <input type="text" name="newCarrierName" placeholder="Назва" required>' +
         '</div>' +
@@ -25,9 +101,36 @@ function addCarrier() {
         '</div>'
     );
 
-    // remove divs
-    $('#modal-carrier div:first-child').remove();
-    $('#modal-carrier div:first-child').remove();
+    // global save and remove selectpicker
+    const selectField = modalFieldForChange.children(':first-child');
+    modalSelectField = selectField.clone();
+    selectField.remove();
+
+    // global save and remove add button
+    const addButton = modalFieldForChange.children(':first-child');
+    modalAddCarrierButton = addButton.clone();
+    addButton.remove();
+
+
+}
+
+// change inputs on selects
+function addCarrierSelect(element) {
+    // if we already delete where select fields
+    if (!modalSelectField && !modalAddCarrierButton) return;
+
+    // console.log('DOO');
+
+    // modal field element for adding
+    const modalFieldForChange = $(element).find('.dynamic-input');
+
+    // clear field for add carrier
+    modalFieldForChange.empty();
+    // console.log(modalFieldForChange.children());
+
+    // add select divs divs
+    modalFieldForChange.append(modalSelectField);
+    modalFieldForChange.append(modalAddCarrierButton);
 }
 
 // Copy selected rows
@@ -115,7 +218,7 @@ $(document).ready(function() {
     // DataTable
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
-        ajax: '/data-load',
+        ajax: '/autos/data-load',
         columns: [
             {data: null, defaultContent: ""},
             {data: 'carrier.name'},
@@ -127,6 +230,12 @@ $(document).ready(function() {
             {data: 'driver.father'},
             {data: 'driver.tel'},
             {data: 'driver.license'},
+            // EDIT BUTTON
+            {'render': function (data, type, full, meta) {
+                    return `<a id="editButton_${full.id}" href="#" >` +
+                    `<i class="edit outline icon" style="font-size: 22px"></i>`+
+                    `</a>`},
+                },
         ],
         columnDefs: [ {
             orderable: false,
@@ -135,7 +244,7 @@ $(document).ready(function() {
         } ],
         select: {
             style:    'multi',
-            // selector: 'td:first-child'
+            selector: 'td:not(:last-child)'
         },
         order: [[ 1, 'asc' ]],
         orderCellsTop: true,
@@ -163,18 +272,12 @@ $(document).ready(function() {
             .draw();
     } );
 
-    // Apply the search
-    // table.columns().every( function () {
-    //     var that = this;
-    //
-    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
-    //         if ( that.search() !== this.value ) {
-    //             that
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
+    //click event on table actions
+    $('#autoTable tbody').on('click','[id^=editButton_]', function (event) {
+        event.preventDefault();
+        const id = $(this).attr('id').split('_')[1];
+        showModalUpdate(id);
+    })
 } )
 
 // For fast table load
@@ -186,11 +289,77 @@ window.onload = function() {
         // selectOnBlur: false,
     });
 
-    // input masks
-    $('#licenseInput').inputmask({"mask": "Посв AAA № 999999"});
-    $('#autoNumInput, #trailNumInput', ).inputmask({"mask": "AA 99-99 AA"});
-    $('#telInput').inputmask({"mask": "099-99-99-999"});
-
     // move pagination
     // var element = $('#childNode').detach();
 };
+
+// InputMasks
+window.onload = function() {
+    // input masks
+    $('#modalUpdate-license-input, #modalAdd-license-input').inputmask({"mask": "Посв AAA № 999999"});
+    $('#modalUpdate-auto-num-input, #modalUpdate-trail-num-input').inputmask({"mask": "AA 99-99 AA"});
+    $('#modalAdd-auto-num-input, #modalAdd-trail-num-input').inputmask({"mask": "AA 99-99 AA"});
+    $('#modalUpdate-tel-input, #modalAdd-tel-input').inputmask({"mask": "099-99-99-999"});
+};
+
+// EDITABLE COLUMNS
+// $(document).ready(function() {
+//     DataTable
+//     const table = $('#autoTable').DataTable({
+//         altEditor: true,     // Enable altEditor
+//         buttons: [{
+//             text: 'Add',
+//             name: 'add'        // do not change name
+//         },
+//             {
+//                 extend: 'selected', // Bind to Selected row
+//                 text: 'Edit',
+//                 name: 'edit'        // do not change name
+//             },
+//             {
+//                 extend: 'selected', // Bind to Selected row
+//                 text: 'Delete',
+//                 name: 'delete'      // do not change name
+//             }]
+//     });
+//
+//     // EDITABLE CELLS
+//     table.MakeCellsEditable({
+//         "onUpdate": editColumn,
+//         "columns": [1,2,3,4,5,6,7,8,9],
+//     });
+// })
+// function editColumn (updatedCell, updatedRow, oldValue) {
+//     // console.log("The new value for the cell is: " + updatedCell.data());
+//     // console.log(JSON.stringify(updatedRow.data()));
+//     //
+//     $.ajax({
+//         url: '/',
+//         type: 'PUT',
+//         contentType: 'application/json',
+//         data: JSON.stringify(updatedRow.data()),
+//         headers: {
+//             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+//         },
+//         success: function (res) {
+//             console.log(res);
+//         },
+//         error: function (xhr, status, error) {
+//             var err = JSON.parse(xhr.responseText);
+//             alert("Помилка при зміні даних авто\n" + err.message)
+//         },
+//     })
+//     console.log(updatedCell);
+//     console.log(updatedCell.column());
+//     console.log("The values for each cell in that row are: " + updatedRow.data());
+// }
+// $(document).ready(function() {
+//     // DataTable
+//     const table = $('#autoTable').DataTable();
+//
+//     // EDITABLE CELLS
+//     table.MakeCellsEditable({
+//         "onUpdate": editColumn,
+//         "columns": [1,2,3,4,5,6,7,8,9],
+//     });
+// })

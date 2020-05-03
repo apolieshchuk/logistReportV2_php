@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/','AutosController@index')->name('auto.index');
+Route::get('/autos/data-load','AutosController@dataLoad')->name('auto.dataLoad');
+Route::get('/autos/{auto}','AutosController@show')->name('auto.show');
+Route::put('/autos/{auto}','AutosController@update')->name('auto.update');
 Route::post('/','AutosController@store')->name('auto.store');
-Route::get('/data-load','AutosController@dataLoad')->name('auto.dataLoad');
 Route::get('/go','GoController@index')->name('go.index');
 Route::get('/report','ReportsController@index')->name('report.index');
 Route::get('/report/data-load','ReportsController@dataLoad')->name('report.dataLoad');

@@ -81,12 +81,6 @@ class ReportsController extends Controller
     /**
      * Get ratio one model to another
      *
-     * input ->
-     * {
-     *  amount: N
-     *  object: Model
-     *  subject: Model
-     * }
      *
      */
     public function ratio() {

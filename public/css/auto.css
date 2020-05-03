@@ -28,12 +28,9 @@ tfoot input {
     width: 500px;
 }
 
-buttons i:before {
-    margin-top: 3px;
-}
-
-
-#filter-col th:first-child input{
+#filter-col th:first-child input,
+#filter-col th:last-child input
+{
     display: none;
 }
 
@@ -68,6 +65,9 @@ table tbody th td:last-child {
     /*outline: none;*/
 }
 
+.ui.modal .actions {
+    text-align: center;
+}
 
 header {
     text-align: center;
@@ -105,6 +105,16 @@ th:nth-child(7), th:nth-child(7) input {
 th:nth-child(8), th:nth-child(8) input,
 th:nth-child(9), th:nth-child(9) input {
     width: 110px;
+}
+
+/*license*/
+th:nth-child(10), th:nth-child(10) input {
+    width: 120px;
+}
+
+/* actions */
+th:nth-child(11), th:nth-child(11) input {
+    width: 20px;
 }
 
 table.dataTable thead th {

@@ -108,6 +108,7 @@ function sendReport() {
                     `${report['carrier']} ` +
                     `${report['auto_num']} ` +
                     `${report['trail_num']} ` +
+                    `${report['trail_num']} ` +
                     `${report['tel']} ` +
                     `${report['license']} \n`
             })
