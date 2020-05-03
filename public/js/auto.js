@@ -1,8 +1,33 @@
 // MODAL
-function showModal() {
+function showModalAuto() {
     $('.ui.modal').modal({
         autofocus:false
     }).modal('show');
+}
+// function showModalCarrier() {
+//     $('.mini.modal')
+//         .modal('show')
+//     ;
+// }
+
+// add new carrier
+function addCarrier() {
+    // add new divs
+    $('#modal-carrier').append(
+        '<div class="eight wide field">' +
+        '   <input type="text" name="newCarrierName" placeholder="Назва" required>' +
+        '</div>' +
+        '<div class="three wide field">' +
+        '   <input type="text" name="newCarrierType" placeholder="Форма власності">' +
+        '</div>' +
+        '<div class="five wide field">' +
+        '   <input type="text" name="newCarrierCode" placeholder="ЄДРПОУ">' +
+        '</div>'
+    );
+
+    // remove divs
+    $('#modal-carrier div:first-child').remove();
+    $('#modal-carrier div:first-child').remove();
 }
 
 // Copy selected rows
@@ -116,7 +141,7 @@ $(document).ready(function() {
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
-        scrollX: true,
+        // scrollX: true,
     });
 
     // Setup - add a text input to each footer cell

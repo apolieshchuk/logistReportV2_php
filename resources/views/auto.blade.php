@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="/css/auto.css?{{ time() }}">
 <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
 
+{{--JQUERY--}}
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 {{--SOME ICONS AND FONTS --}}
 {{--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">--}}
 {{--<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">--}}
@@ -33,12 +36,13 @@
 
 @section('body')
 
+{{--MAIN--}}
 <div style="padding: 0 10px; display: flex; flex-direction: column;">
 {{--    HEADER MENU--}}
     <div id="header-menu"
         style="margin-bottom: 10px; width: 800px; align-self: center; margin-top: 10px;"
         class="five ui buttons" >
-        <button class="ui blue button" onclick="showModal()" id="addAutoButton">
+        <button class="ui blue button" onclick="showModalAuto()" id="addAutoButton">
             <i class="plus circle icon" style="font-size:24px"></i> <span>Додати</span>
         </button>
         <button class="ui blue button" id="clearButton">
@@ -59,66 +63,74 @@
     </nav>
     <hr style="width: 100%; height: 1px">
 {{--    MAIN TABLE--}}
-    <table id="autoTable" class="display cell-border" style="width:100%;">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Перевізник</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Посвідчення</th>
-            {{--            <th style="display: none">id</th>--}}
-        </tr>
-        <tr id="filter-col">
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            {{--            <th style="display: none">id</th>--}}
-        </tr>
-        </thead>
-        <tfoot>
-        <tr>
-            <th></th>
-            <th>Перевізник</th>
-            <th>Марка</th>
-            <th>№авт</th>
-            <th>№прич</th>
-            <th>Прiзвище</th>
-            <th>Iмя</th>
-            <th>По-батьк</th>
-            <th>Тел</th>
-            <th>Посвідчення</th>
-            {{--            <th style="display: none">id</th>--}}
-        </tr>
-        </tfoot>
-    </table>
+    <div  style="overflow: auto">
+        <table id="autoTable" class="display cell-border" style="width:100%;">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Перевізник</th>
+                <th>Марка</th>
+                <th>№авт</th>
+                <th>№прич</th>
+                <th>Прiзвище</th>
+                <th>Iмя</th>
+                <th>По-батьк</th>
+                <th>Тел</th>
+                <th>Посвідчення</th>
+                {{--            <th style="display: none">id</th>--}}
+            </tr>
+            <tr id="filter-col">
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                {{--            <th style="display: none">id</th>--}}
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th></th>
+                <th>Перевізник</th>
+                <th>Марка</th>
+                <th>№авт</th>
+                <th>№прич</th>
+                <th>Прiзвище</th>
+                <th>Iмя</th>
+                <th>По-батьк</th>
+                <th>Тел</th>
+                <th>Посвідчення</th>
+                {{--            <th style="display: none">id</th>--}}
+            </tr>
+            </tfoot>
+        </table>
+    </div>
+
 </div>
 
-{{--MODAL--}}
-<div class="ui modal"
+{{--MODAL ADD AUTO --}}
+<div class="ui modal "
 style="padding: 0 20px 20px 20px; width: 500px">
     <i class="close icon"></i>
     <div class="header">
         Додати авто
     </div>
+    @if($errors->any())
+        <div class="ui negative message">
+            <p>{{ $errors->first() }}</p>
+        </div>
+    @endif
     <form class="ui form" method="POST" action="/">
         @csrf
         <h4 class="ui dividing header">Автомобіль</h4>
         <div class="field">
             <label>Перевізник</label>
-            <div class="two fields">
+            <div id="modal-carrier" class="two fields">
                 <div class="fourteen wide field">
                     <select name='carrier_id' id="carrierSelect" class="ui search dropdown">
                         <option value="" selected disabled>Перевізник</option>
@@ -129,9 +141,9 @@ style="padding: 0 20px 20px 20px; width: 500px">
                 </div>
                 <div class="two wide field">
                     <i class="plus square icon"
+                       onclick="addCarrier()"
                        style="font-size:36px; color:#2185d0; cursor: pointer"></i>
                 </div>
-                {{--            <input type="text" name="carrier" placeholder="Перевізник">--}}
             </div>
         </div>
         <div class="field">
@@ -182,12 +194,10 @@ style="padding: 0 20px 20px 20px; width: 500px">
         </div>
     </form>
 </div>
+
 @endsection
 
 @section('footer')
-
-{{--JQUERY--}}
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
 {{--MY STYLE--}}
 <script src="/js/auto.js?{{ time() }}"></script>
@@ -208,5 +218,12 @@ style="padding: 0 20px 20px 20px; width: 500px">
 
 {{--    INPUT MASK--}}
 <script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
+
+{{--HANDLE ERRORS--}}
+@if($errors->any())
+    <script> showModalAuto()  </script>
+@endif
 @endsection
+
+
 

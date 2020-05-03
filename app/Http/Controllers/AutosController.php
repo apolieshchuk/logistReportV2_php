@@ -19,26 +19,40 @@ class AutosController extends Controller
     }
 
     public function store() {
-        // check or create driver
-        $driver = Contacts::firstOrCreate([
-            'surname' => request('dr_surn'),
-            'name' => request('dr_name'),
-            'father' => request('dr_fath'),
-            'post_id' => Posts::where('name', 'Водій')->first()->id,
-            'tel' => request('tel'),
-            'license' => request('license')
-        ]);
+        try {
+            // if need - create new carrier todo now in DB all code fields empty and here NULL
+            $carrier_id = request('carrier_id');
+            if (request('newCarrierName')) {
+                $carrier = Carriers::firstOrCreate([
+                    'name' => request('newCarrierName'),
+                    'type' => request('newCarrierType'),
+                    'code' => request('newCarrierCode')
+                ]);
+                $carrier_id = $carrier->id;
+            }
 
-        // create auto
-        Autos::firstOrCreate([
-            'carrier_id' => request('carrier_id'),
-            'mark' => request('mark'),
-            'auto_num' => request('auto_num'),
-            'trail_num' => request('trail_num'),
-            'driver_id' => $driver->id,
-            'notes' => request('notes'),
-        ]);
+            // check or create driver
+            $driver = Contacts::firstOrCreate([
+                'surname' => request('dr_surn'),
+                'name' => request('dr_name'),
+                'father' => request('dr_fath'),
+                'post_id' => Posts::where('name', 'Водій')->first()->id,
+                'tel' => request('tel'),
+                'license' => request('license')
+            ]);
 
+            // create auto
+            Autos::firstOrCreate([
+                'carrier_id' => $carrier_id,
+                'mark' => request('mark'),
+                'auto_num' => request('auto_num'),
+                'trail_num' => request('trail_num'),
+                'driver_id' => $driver->id,
+                'notes' => request('notes'),
+            ]);
+        } catch (\Exception $e) {
+            back()->withErrors($e->getMessage());
+        }
         return back();
     }
 

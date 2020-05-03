@@ -121,6 +121,10 @@ table.dataTable thead th {
         width: 300px;
     }
 
+    .ui.modal {
+        width: 100% !important;
+    }
+
     #header-menu {
         width: 100% !important;
         height: 38px;

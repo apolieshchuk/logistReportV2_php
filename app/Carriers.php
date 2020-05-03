@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Carriers extends Model
 {
+    protected $fillable = ['name', 'type', 'code'];
     public function autos() {
         return $this->hasMany(Autos::class);
     }
