@@ -49,7 +49,7 @@ table tr th:nth-child(8), th:nth-child(8) input{
 }
 
 table tr th:nth-child(9), th:nth-child(9) input {
-    width: 80px;
+    width: 30px;
 }
 
 table tr th:nth-child(10), th:nth-child(10) input,
@@ -124,6 +124,14 @@ input[type="text"]:focus {
     #autoButton {
         /*margin-top: 5px;*/
         width: 100px;
+    }
+
+    table tr td {
+        padding: 6px 3px !important;
+    }
+
+    table tr th:nth-child(7), th:nth-child(7) input {
+        width: 70px;
     }
 }
 

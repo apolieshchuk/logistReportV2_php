@@ -137,4 +137,8 @@ table.dataTable thead th {
     #copyButton{
         display: none;
     }
+
+    table tr td {
+        padding: 6px !important;
+    }
 }
