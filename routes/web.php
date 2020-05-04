@@ -39,6 +39,6 @@ Route::post('/report','ReportsController@store')
 Route::get('/report/ratio','ReportsController@ratio')
     ->name('report.ratio')->middleware('auth');
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::get('/home', 'HomeController@index')->name('home');

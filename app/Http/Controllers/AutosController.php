@@ -57,6 +57,7 @@ class AutosController extends Controller
     }
 
     public function update(Autos $auto) {
+
         try {
             $validator = $this->checkValid(request()->input());
 
@@ -129,20 +130,30 @@ class AutosController extends Controller
      *  This function find exists driver_id or create new driver
      */
     private function findOrCreateDriver () {
+
         // check or create driver
+        print_r(request('tel'));
         $driver = Contacts::firstOrCreate([
             'surname' => request('dr_surn'),
             'name' => request('dr_name'),
             'father' => request('dr_fath'),
             'post_id' => Posts::where('name', 'Водій')->first()->id,
-            'tel' => request('tel'),
-        ], ['license' => request('license')]); // todo don't check license for compare
+        ], [
+            'tel' => request('tel'), 'license' => request('license')
+        ]); // todo don't check license for compare
 
         // if creating or updating with license - update old license
         if (request('license')) {
             $driver->license = request('license');
             $driver->save();
         }
+
+        // if creating or updating with tel - update old tel
+        if (request('tel')) {
+            $driver->tel = request('tel');
+            $driver->save();
+        }
+
         return $driver->id;
     }
 
