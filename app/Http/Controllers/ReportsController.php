@@ -20,6 +20,7 @@ class ReportsController extends Controller
     public function store (Request $request) {
         $json = $request->json()->all();
 
+        $createdReports = []; // report for clipboard
         foreach ($json as $item) {
             $validator = \Validator::make($item, [
                 'date' => 'required|date',
@@ -40,10 +41,10 @@ class ReportsController extends Controller
             }
         }
 
-        // insert data
-        $createdReports = [];
         foreach ($json as $key => $report) {
-            $item = Reports::firstOrCreate($report);
+            $item = Reports::firstOrCreate($report); // insert data
+
+            // create items for copy in clipboard
             $item = [
                 'num' => $key + 1,
                 'date' => $item['date'],
@@ -60,8 +61,12 @@ class ReportsController extends Controller
             array_push($createdReports, $item);
         }
 
-        // update route
+        // update route history
         Routes::find($json[0]['route_id'])->touch();
+        // update cargo history
+        Cargos::find($json[0]['cargo_id'])->touch();
+        // update manager history
+        Contacts::find($json[0]['manager_id'])->touch();
 
         return json_encode($createdReports);
     }

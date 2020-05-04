@@ -37,13 +37,13 @@
         </div>
 {{--        INFO PICKER--}}
         <div id="infoPicker" style="text-align: center; margin-bottom: 10px">
-            <select id="managerSelect" class="ui search dropdown" style="margin-bottom: 10px" required disabled>
+            <select id="managerSelect" class="ui search dropdown" style="margin-bottom: 10px" required>
                 <option value="" selected disabled >Оберіть менеджера</option>
                 @foreach($managers as $manager)
                     <option value="{{ $manager['id'] }}">{{ $manager['surname'] }}</option>
                 @endforeach
             </select>
-            <select id="cargoSelect" class="ui search dropdown" required disabled>
+            <select id="cargoSelect" class="ui search dropdown" required>
                 <option value="" selected disabled>Оберіть вантаж</option>
                 @foreach($cargos as $cargo)
                     <option value="{{ $cargo['id'] }}">{{ $cargo['name'] }}</option>
