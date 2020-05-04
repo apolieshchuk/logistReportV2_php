@@ -1,5 +1,6 @@
 body{
     height: auto !important;
+    background-color: #f8fafc; !important;
 }
 input {
     width: 100%;
