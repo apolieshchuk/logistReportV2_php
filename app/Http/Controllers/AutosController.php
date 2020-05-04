@@ -20,6 +20,7 @@ class AutosController extends Controller
 
     public function show($id) {
         return Autos::with([
+            'carrier:id,name',
             'driver:id,surname,name,father,tel,license'
         ])->find($id);
     }
@@ -92,6 +93,12 @@ class AutosController extends Controller
         }
 
 //        return request()->input();
+    }
+
+    public function destroy(Autos $auto) {
+        $auto->delete();
+        return back();
+//        return "hello world";
     }
 
     /**

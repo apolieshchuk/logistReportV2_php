@@ -17,6 +17,7 @@ Route::get('/','AutosController@index')->name('auto.index');
 Route::get('/autos/data-load','AutosController@dataLoad')->name('auto.dataLoad');
 Route::get('/autos/{auto}','AutosController@show')->name('auto.show');
 Route::put('/autos/{auto}','AutosController@update')->name('auto.update');
+Route::delete('/autos/{auto}','AutosController@destroy')->name('auto.destroy');
 Route::post('/','AutosController@store')->name('auto.store');
 Route::get('/go','GoController@index')->name('go.index');
 Route::get('/report','ReportsController@index')->name('report.index');

@@ -62,6 +62,25 @@ function showModalUpdate(id) {
     }).modal('show');
 }
 
+function showModalDelete(id) {
+    // change active modal action
+    $('#modalDelete_form').attr('action',`/autos/${id}`)
+
+    // ajax request for get id data
+    $.ajax({
+        url: `/autos/${id}`,
+        contentType: 'application/json',
+        success: function (res) {
+            // Add info in modal
+            $('#modalDelete .content span').text(`<< ${res.carrier['name']} ${res.mark} ${res.auto_num} >> `);
+        }
+    })
+
+    $('.ui.basic.modal')
+        .modal('show')
+    ;
+}
+
 // todo universe function for show modals
 function showModal(modal) {
     $(modal).modal({
@@ -230,12 +249,17 @@ $(document).ready(function() {
             {data: 'driver.father'},
             {data: 'driver.tel'},
             {data: 'driver.license'},
-            // EDIT BUTTON
+            // ACTION BUTTONS
             {'render': function (data, type, full, meta) {
-                    return `<a id="editButton_${full.id}" href="#" >` +
+                    return `<div style="display: flex;">`+
+                    `<a id="editButton_${full.id}" href="#" >` +
                     `<i class="edit outline icon" style="font-size: 22px"></i>`+
-                    `</a>`},
-                },
+                    `</a>` +
+                    `<a id="deleteButton_${full.id}" href="#" >` +
+                    `<i class="x icon" style="font-size: 22px"></i>`+
+                    `</a> </div>`
+                    }
+            },
         ],
         columnDefs: [ {
             orderable: false,
@@ -272,11 +296,18 @@ $(document).ready(function() {
             .draw();
     } );
 
-    //click event on table actions
+    //click event on edit action
     $('#autoTable tbody').on('click','[id^=editButton_]', function (event) {
         event.preventDefault();
         const id = $(this).attr('id').split('_')[1];
         showModalUpdate(id);
+    })
+
+    //click event on delete action
+    $('#autoTable tbody').on('click','[id^=deleteButton_]', function (event) {
+        event.preventDefault();
+        const id = $(this).attr('id').split('_')[1];
+        showModalDelete(id);
     })
 } )
 
