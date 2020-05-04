@@ -50,6 +50,9 @@ class ReportsController extends Controller
                 'carrier' => Carriers::find($item['carrier_id'])->name,
                 'auto_num' => $item['auto_num'],
                 'trail_num' => $item['trail_num'],
+                'dr_surn' => Contacts::find($item['driver_id'])->surname,
+                'dr_name' => Contacts::find($item['driver_id'])->name,
+                'dr_fath' => Contacts::find($item['driver_id'])->father,
                 'tel' => Contacts::find($item['driver_id'])->tel,
                 'license' => Contacts::find($item['driver_id'])->license,
             ];

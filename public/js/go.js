@@ -54,6 +54,14 @@ function getRatio (amount, route_id, subject = null, subject_id = null ) {
     });
 }
 
+function convertDateFormat(dateStr) {
+    const d = new Date(dateStr)
+    const ye = new Intl.DateTimeFormat('en', { year: 'numeric' }).format(d)
+    const mo = new Intl.DateTimeFormat('en', { month: 'short' }).format(d)
+    const da = new Intl.DateTimeFormat('en', { day: '2-digit' }).format(d)
+    return `${da}-${mo}-${ye}`;
+}
+
 function sendReport() {
     // get autos info
     let autos = []
@@ -97,18 +105,20 @@ function sendReport() {
             'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
         },
         success: function (res) {
-            // console.log(JSON.parse(res));
+            console.log(JSON.parse(res));
             res = JSON.parse(res);
 
             //copy to clipboard todo together with prev copy
             let textForCopy = ""
-            textForCopy += `${res[0]['date']} ${res[0]['route']} \n\n`
+            textForCopy += `${ convertDateFormat(res[0]['date']) } ${res[0]['route']} \n\n`
             res.forEach(function(report) {
                 textForCopy += `${report['num']}) `+
                     `${report['carrier']} ` +
                     `${report['auto_num']} ` +
                     `${report['trail_num']} ` +
-                    `${report['trail_num']} ` +
+                    `${report['dr_surn']} ` +
+                    `${report['dr_name']} ` +
+                    `${report['dr_fath']} ` +
                     `${report['tel']} ` +
                     `${report['license']} \n`
             })
