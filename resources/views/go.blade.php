@@ -74,7 +74,7 @@
 <hr style="margin-bottom: 20px;">
 
 {{--MAIN TABLE--}}
-<div id="table-wrapper">
+<div id="table-wrapper" style="width: 80%;margin: auto">
     <table class="ui celled table"
            style="white-space:nowrap; width: 100%; margin: auto; min-width: 800px">
         <thead>

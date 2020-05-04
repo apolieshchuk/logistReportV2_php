@@ -8,6 +8,62 @@ function showModalDelete(id) {
     ;
 }
 
+function showModalUpdate(id) {
+    // change active modal action
+    $('#modalUpdate_form').attr('action',`/autos/${id}`)
+
+    // ajax request for get id data
+    $.ajax({
+        url: `/report/${id}`,
+        contentType: 'application/json',
+        success: function (res) {
+            // fill inputs data
+
+            // $('#modalUpdate-mark-input').val(res.mark);
+            $('#modalUpdate-auto_num-input').val(res.auto_num);
+            $('#modalUpdate-carrier-select').val(res.carrier_id).change();
+            $('#modalUpdate-cargo-select').val(res.cargo_id).change();
+            $('#modalUpdate-manager-select').val(res.manager_id).change();
+            $('#modalUpdate-route-select').val(res.route_id).change();
+            // $('#modalUpdate-trail-num-input').val(res.trail_num);
+            $('#modalUpdate-dr_surn-input').val(res.driver_id).change();
+            $('#modalUpdate-f1-input').val(res.f1);
+            $('#modalUpdate-f2-input').val(res.f2);
+            $('#modalUpdate-tr-select').val(res.tr).change();
+            // $('#modalUpdate-name-input').val(res.driver['name']);
+            // $('#modalUpdate-father-input').val(res.driver['father']);
+            // $('#modalUpdate-license-input').val(res.driver['license']);
+            // $('#modalUpdate-tel-input').val(res.driver['tel']);
+            $('#modalUpdate-notes-input').val(res.notes);
+        }
+    })
+
+    // show modal
+    $('#modalUpdate').modal({
+        autofocus:false,
+        onHide: function () {
+            $('.modal-error-box').remove();
+            document.getElementById("modalUpdate_form").reset();
+        },
+        onShow: function () {
+            // dropdown
+            $('.ui.dropdown').dropdown({
+                fullTextSearch: true,
+                // showOnFocus: false
+                // selectOnBlur: false,
+            });
+        }
+    }).modal('show');
+}
+
+// Dropdown
+window.onload = function(){
+    $('.ui.dropdown').dropdown({
+        fullTextSearch: true,
+        // selectOnBlur: false,
+    });
+}
+
 // clear checked
 $('#clearButton').click(function () {
     // uncheked all
@@ -113,9 +169,9 @@ $(document).ready(function() {
     //click event on edit action
     $('#autoTable tbody').on('click','[id^=editButton_]', function (event) {
         event.preventDefault();
-        alert('В розробці...')
-        // const id = $(this).attr('id').split('_')[1];
-        // showModalUpdate(id);
+        // alert('В розробці...')
+        const id = $(this).attr('id').split('_')[1];
+        showModalUpdate(id);
     })
 
     //click event on delete action

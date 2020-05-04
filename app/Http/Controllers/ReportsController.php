@@ -6,6 +6,7 @@ use App\Autos;
 use App\Cargos;
 use App\Carriers;
 use App\Contacts;
+use App\Posts;
 use App\Reports;
 use App\Routes;
 use Illuminate\Http\Request;
@@ -14,7 +15,20 @@ use Yajra\DataTables\DataTables;
 class ReportsController extends Controller
 {
     public function index() {
-        return view('report');
+        $managers = Contacts::orderBy('updated_at', 'desc')
+            ->where('post_id', Posts::where('name', 'Менеджер')
+            ->first()->id)->get();
+        $drivers = Contacts::orderBy('surname', 'asc')
+            ->where('post_id', Posts::where('name', 'Водій')
+            ->first()->id)->get();
+
+        return view('report', [
+            'routes' => Routes::orderBy('updated_at', 'desc')->orderBy('name', 'asc')->get(),
+            'cargos' => Cargos::orderBy('updated_at', 'desc')->orderBy('name', 'asc')->get(),
+            'managers' => $managers,
+            'carriers' => Carriers::orderBy('name', 'asc')->get(),
+            'drivers' => $drivers
+        ]);
     }
 
     public function store (Request $request) {
@@ -74,6 +88,14 @@ class ReportsController extends Controller
     public function destroy(Reports $report) {
         $report->delete();
         return back();
+    }
+
+    public function show(Reports $report) {
+//        return Reports::with([
+//            'carrier:id,name',
+//            'driver:id,surname,name,father,tel,license'
+//        ])->find($id);;
+        return $report;
     }
 
     public function dataLoad() {

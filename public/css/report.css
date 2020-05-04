@@ -14,8 +14,36 @@ tbody tr:hover{
     cursor: pointer;
 }
 
+#modalUpdate {
+    left: 65%;
+}
+
 #filterbox {
     width: 300px;
+}
+
+#tr-select-wrapper .search{
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
+}
+
+#dr_surn-select-wrapper .search {
+    width: 140px;
+    max-width: 140px;
+    min-width: 140px;
+    /*font-size: 12px;*/
+}
+
+#dr_surn-select-wrapper .menu.transition {
+    font-size: 10px;
+}
+
+#modalUpdate-dr_surn-select .search,
+#modalUpdate-dr_surn-select{
+    width: 100px;
+    max-width: 100px;
+    min-width: 100px;
 }
 
 header nav input,

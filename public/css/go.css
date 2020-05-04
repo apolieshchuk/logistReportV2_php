@@ -34,6 +34,11 @@ input[type='date'] {
 
 @media screen and (max-width: 800px) {
 
+    #table-wrapper {
+        width: 100% !important;
+        margin: 0 10px !important;
+    }
+
     /*SELECT ROUTE BUTTON*/
     #route-select-wrapper .search:first-child {
         width: 300px;
