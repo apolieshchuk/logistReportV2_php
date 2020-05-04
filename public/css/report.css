@@ -129,6 +129,18 @@ input[type="text"]:focus {
 }
 
 @media screen and (max-width: 800px) {
+    #modalUpdate {
+        width: 100% !important;
+    }
+
+    .actions button {
+        padding: 11px 21px !important;
+        margin: 0 21px 11px 21px !important;
+        width: 110px !important;
+        /*text-align: center;*/
+        /*margin-left: 30px;*/
+    }
+
     header {
         flex-direction: column;
     }
@@ -149,7 +161,6 @@ input[type="text"]:focus {
     form button {
         margin: 0 0 5px 0 !important;
         padding: 1px 1px 1px 12px !important;
-
         width: 40px;
     }
 

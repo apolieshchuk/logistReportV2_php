@@ -1,3 +1,5 @@
+// TODO do ajax request on update route for redraw only
+
 // MODALS
 function showModalDelete(id) {
     // change active modal action
