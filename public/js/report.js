@@ -1,3 +1,12 @@
+// MODALS
+function showModalDelete(id) {
+    // change active modal action
+    $('#modalDelete_form').attr('action',`/report/${id}`)
+
+    $('.ui.basic.modal')
+        .modal('show')
+    ;
+}
 
 // clear checked
 $('#clearButton').click(function () {
@@ -34,7 +43,7 @@ $(document).ready(function() {
         // bPaginate: false,
         select: {
             style:    'multi',
-            // selector: 'td:first-child'
+            selector: 'td:not(:last-child)'
         },
         // order: [[ 1, 'desc' ]],
         orderCellsTop: true,
@@ -55,6 +64,17 @@ $(document).ready(function() {
             {data: 'f1'},
             {data: 'tr'},
             {data: 'notes'},
+            // ACTION BUTTONS
+            {'render': function (data, type, full, meta) {
+                    return `<div style="display: flex;">`+
+                        `<a id="editButton_${full.id}" href="#" >` +
+                        `<i class="edit outline icon" style="font-size: 22px"></i>`+
+                        `</a>` +
+                        `<a id="deleteButton_${full.id}" href="#" >` +
+                        `<i class="x icon" style="font-size: 22px"></i>`+
+                        `</a> </div>`
+                }
+            },
         ],
         columnDefs: [
             {
@@ -90,18 +110,20 @@ $(document).ready(function() {
             .draw();
     } );
 
-    // Apply the search
-    // table.columns().every( function () {
-    //     var that = this;
-    //
-    //     $( 'input', this.footer() ).on( 'keyup change clear', function () {
-    //         if ( that.search() !== this.value ) {
-    //             that
-    //                 .search( this.value )
-    //                 .draw();
-    //         }
-    //     } );
-    // } );
+    //click event on edit action
+    $('#autoTable tbody').on('click','[id^=editButton_]', function (event) {
+        event.preventDefault();
+        alert('В розробці...')
+        // const id = $(this).attr('id').split('_')[1];
+        // showModalUpdate(id);
+    })
+
+    //click event on delete action
+    $('#autoTable tbody').on('click','[id^=deleteButton_]', function (event) {
+        event.preventDefault();
+        const id = $(this).attr('id').split('_')[1];
+        showModalDelete(id);
+    })
 
 } )
 

@@ -98,7 +98,6 @@ class AutosController extends Controller
     public function destroy(Autos $auto) {
         $auto->delete();
         return back();
-//        return "hello world";
     }
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Autos;
 use App\Cargos;
 use App\Carriers;
 use App\Contacts;
@@ -63,6 +64,11 @@ class ReportsController extends Controller
         Routes::find($json[0]['route_id'])->touch();
 
         return json_encode($createdReports);
+    }
+
+    public function destroy(Reports $report) {
+        $report->delete();
+        return back();
     }
 
     public function dataLoad() {

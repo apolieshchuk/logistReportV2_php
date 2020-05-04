@@ -58,8 +58,9 @@ table tr th:nth-child(12), th:nth-child(12) input{
     width: 30px;
 }
 
-table tr th:nth-child(13), th:nth-child(13) input {
-    width: 80px;
+/* actions */
+th:nth-child(13), th:nth-child(13) input {
+    width: 20px;
 }
 
 table.dataTable thead th {

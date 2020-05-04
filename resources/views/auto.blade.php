@@ -287,7 +287,7 @@
         </form>
     </div>
 
-{{--    MODAL DELETE AUTO--}}
+    {{--MODAL DELETE AUTO--}}
     <div id="modalDelete" class="ui basic modal">
         <div class="ui icon header">
             <i class="trash icon"></i>

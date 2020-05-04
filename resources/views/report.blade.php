@@ -16,7 +16,7 @@
 @endsection
 
 @section('body')
-
+{{--MAIN TABLE--}}
 <div style="padding: 15px 10px">
     <header style="margin-bottom: 10px; display: flex; justify-content: space-between">
 
@@ -62,12 +62,12 @@
                 <th>Маршрут</th>
                 <th>Перевізник</th>
                 <th>#Авт</th>
-{{--                <th>#Прич</th>--}}
                 <th>Водій</th>
                 <th>Ф2</th>
                 <th>Ф1</th>
                 <th>Тр</th>
                 <th>Замітки</th>
+                <th>Дії</th>
             </tr>
             <tr>
                 <th></th>
@@ -77,12 +77,12 @@
                 <th>Маршрут</th>
                 <th>Перевізник</th>
                 <th>#Авт</th>
-                {{--<th>#Прич</th>--}}
                 <th>Водій</th>
                 <th>Ф2</th>
                 <th>Ф1</th>
                 <th>Тр</th>
                 <th>Замітки</th>
+                <th>Дії</th>
             </tr>
             </thead>
             <tfoot>
@@ -94,15 +94,45 @@
                 <th>Маршрут</th>
                 <th>Перевізник</th>
                 <th>#Авт</th>
-{{--                <th>#Прич</th>--}}
                 <th>Водій</th>
                 <th>Ф2</th>
                 <th>Ф1</th>
                 <th>Тр</th>
                 <th>Замітки</th>
+                <th>Дії</th>
             </tr>
             </tfoot>
         </table>
+    </div>
+</div>
+
+{{--MODAL EDIT AUTO --}}
+{{--// TODO--}}
+
+{{--MODAL DELETE AUTO--}}
+<div id="modalDelete" class="ui basic modal">
+    <div class="ui icon header">
+        <i class="trash icon"></i>
+        Видалити звіт
+    </div>
+    <div class="content">
+        <p>Чи дійсно ви хочете видалити звіт <span></span>з бази даних?</p>
+    </div>
+    <div class="actions">
+        <form id="modalDelete_form" action="/report/?" method="POST">
+            @csrf
+            @method('DELETE')
+            <div class="ui green basic cancel inverted button">
+                <i class="remove icon"></i>
+                Ні
+            </div>
+            <button style="background-color: rgba(0,0,0,0); border: none; padding: 0;outline: none">
+                <div class="ui red ok inverted button" style="margin-right: 0;">
+                    <i class="checkmark icon"></i>
+                    Так
+                </div>
+            </button>
+        </form>
     </div>
 </div>
 @endsection
