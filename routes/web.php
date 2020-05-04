@@ -53,6 +53,9 @@ Route::delete('/report/{report}','ReportsController@destroy')
 Route::get('/report/{report}','ReportsController@show')
     ->name('report.show')->middleware('auth');
 
+Route::put('/report/{report}','ReportsController@update')
+    ->name('report.update')->middleware('auth');
+
 
 Auth::routes(['register' => false]);
 

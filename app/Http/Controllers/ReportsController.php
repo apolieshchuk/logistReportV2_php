@@ -91,11 +91,49 @@ class ReportsController extends Controller
     }
 
     public function show(Reports $report) {
-//        return Reports::with([
-//            'carrier:id,name',
-//            'driver:id,surname,name,father,tel,license'
-//        ])->find($id);;
         return $report;
+    }
+
+    public function update(Reports $report) {
+
+        try {
+            $validator = $this->checkValid(request()->input());
+
+            if ($validator->fails()) {
+                throw new \Exception($validator->errors()->first());
+            }
+
+            // if need - create new carrier or return exists
+//            $carrier_id = $this->findOrCreateCarrier();
+
+            // check or create driver
+//            $driver_id = $this->findOrCreateDriver();
+
+            $report->update([
+                'date' => request('date'),
+                'manager_id' => request('manager_id'),
+                'cargo_id' => request('cargo_id'),
+                'route_id' => request('route_id'),
+                'carrier_id' => request('carrier_id'),
+                'auto_num' => request('auto_num'),
+                'trail_num' => request('trail_num'),
+                'driver_id' => request('driver_id'),
+                'f2' => request('f2'),
+                'f1' => request('f1'),
+                'tr' => request('tr'),
+                'notes' => request('notes'),
+            ]);
+
+            // update
+            $report->touch();
+
+            return back();
+
+        } catch (\Exception $e) {
+            return back()
+                ->withErrors($e->getMessage())
+                ->with('id', $report->id);
+        }
     }
 
     public function dataLoad() {
@@ -159,6 +197,22 @@ class ReportsController extends Controller
         $arr = $collection->pluck($column_name)->countBy()->toArray();
         asort($arr);
         return array_key_last($arr);
+    }
+
+    private function checkValid($request) {
+        return \Validator::make($request, [
+            'f2' => 'numeric',
+            'f1' => 'numeric',
+            'tr' => 'in:0,1',
+            'date' => 'required',
+            'route_id' => 'required',
+            'manager_id' => 'required',
+            'cargo_id' => 'required',
+            'carrier_id' => 'required',
+            'auto_num' => 'required',
+            'driver_id' => 'required',
+//            'dr_surn' => 'required_without:dr_name'
+        ]);
     }
 
 }

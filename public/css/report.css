@@ -35,8 +35,12 @@ tbody tr:hover{
     /*font-size: 12px;*/
 }
 
-#dr_surn-select-wrapper .menu.transition {
-    font-size: 10px;
+#dr_surn-select-wrapper .menu.transition .item {
+    font-size: 12px !important;
+}
+
+.ui.modal .actions {
+    text-align: center;
 }
 
 #modalUpdate-dr_surn-select .search,

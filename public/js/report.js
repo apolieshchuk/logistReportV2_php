@@ -10,7 +10,7 @@ function showModalDelete(id) {
 
 function showModalUpdate(id) {
     // change active modal action
-    $('#modalUpdate_form').attr('action',`/autos/${id}`)
+    $('#modalUpdate_form').attr('action',`/report/${id}`)
 
     // ajax request for get id data
     $.ajax({
@@ -20,13 +20,14 @@ function showModalUpdate(id) {
             // fill inputs data
 
             // $('#modalUpdate-mark-input').val(res.mark);
+            $('#modalUpdate-date-input').val(res.date);
             $('#modalUpdate-auto_num-input').val(res.auto_num);
             $('#modalUpdate-carrier-select').val(res.carrier_id).change();
             $('#modalUpdate-cargo-select').val(res.cargo_id).change();
             $('#modalUpdate-manager-select').val(res.manager_id).change();
             $('#modalUpdate-route-select').val(res.route_id).change();
             // $('#modalUpdate-trail-num-input').val(res.trail_num);
-            $('#modalUpdate-dr_surn-input').val(res.driver_id).change();
+            $('#modalUpdate-dr_surn-select').val(res.driver_id).change();
             $('#modalUpdate-f1-input').val(res.f1);
             $('#modalUpdate-f2-input').val(res.f2);
             $('#modalUpdate-tr-select').val(res.tr).change();
