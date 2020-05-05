@@ -43,7 +43,6 @@ class ReportsController extends Controller
                 'route_id'=> 'required|numeric',
                 'carrier_id'=> 'required|numeric',
                 'auto_num'=> 'required',
-                'trail_num'=> 'required',
                 'driver_id'=> 'required|numeric',
                 'f2'=> 'required|numeric',
                 'f1'=> 'required|numeric',

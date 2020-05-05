@@ -1,5 +1,5 @@
 body {
-    background-color: #f8fafc; !important;
+    background-color: #f8fafc !important;
 }
 
 header {
@@ -20,6 +20,19 @@ tbody tr:hover{
 
 #filterbox {
     width: 300px;
+}
+/*filters-col size*/
+thead tr th {
+    padding: 3px !important;
+}
+thead tr th input {
+    /*padding: 1px !important;*/
+    width: 100% !important;
+}
+thead tr th:first-child input,
+thead tr th:last-child input{
+    /*padding: 1px !important;*/
+    display: none;
 }
 
 #tr-select-wrapper .search{

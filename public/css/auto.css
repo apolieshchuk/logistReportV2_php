@@ -1,7 +1,7 @@
 body {
     /*padding: 20px;*/
     /*box-sizing: content-box;*/
-    background-color: #f8fafc; !important;
+    background-color: #f8fafc !important;
 }
 
 tfoot input {
@@ -78,6 +78,15 @@ tbody tr:hover{
     cursor: pointer;
 }
 
+/*filters size*/
+thead tr th {
+    padding: 3px !important;
+}
+#filter-col th input {
+    /*padding: 1px !important;*/
+    width: 100% !important;
+}
+
 /* Column size */
 /*#*/
 th:first-child, th:first-child input {
@@ -91,7 +100,7 @@ th:nth-child(2), th:nth-child(2) input {
 
 /*mark*/
 th:nth-child(3), th:nth-child(3) input {
-    width: 50px;
+    width: 70px;
 }
 
 /*auto_num, trail_num, surname, name*/

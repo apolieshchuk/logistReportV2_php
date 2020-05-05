@@ -62,6 +62,11 @@ function convertDateFormat(dateStr) {
     return `${da}-${mo}-${ye}`;
 }
 
+$('#goButton2').on('click', function(event) {
+    event.preventDefault();
+    sendReport();
+});
+
 function sendReport() {
     // get autos info
     let autos = []

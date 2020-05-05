@@ -9,6 +9,10 @@
 
 {{--MY CSS--}}
 <link rel="stylesheet" href="/css/go.css?{{ time() }}">
+
+{{--JQUERY--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 {{--BOOTSTRAP--}}
 {{--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">--}}
 {{--BOOTSTRAP-SELECT--}}
@@ -50,19 +54,18 @@
                 @endforeach
             </select>
         </div>
-        <div id="mobileButtons" class="ui grid" >
-            <div class="eight wide column">
+        <div id="mobileButtons" >
+            <div class="column" style="height: 38px; width: 180px; margin-right: 5px; margin-left: 5px;">
                 <a style="height: 38px; width: 100%; align-self: center" href="/"
                    class="ui blue button" id="autoButton2">Авто</a>
             </div>
-            <div class="eight wide column">
-                <button
-                    onclick="sendReport()"
-                    style="align-self: center; height: 38px; width: 100%;" class="ui blue button" id="goButton2"
-                >Відправити</button>
+            <div class="column">
+                <a style="height: 38px; width: 180px;align-self: center" href="#"
+                   class="ui blue button" id="goButton2"> Go! </a>
             </div>
         </div>
     </div>
+
 
     <button
         onclick="sendReport()"
@@ -141,9 +144,6 @@
 
 {{--BOOTSTRAP-SELECT--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>--}}
-
-{{--JQUERY--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 {{--SEMANTIC--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
