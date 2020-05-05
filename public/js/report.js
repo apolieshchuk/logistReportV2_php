@@ -99,6 +99,10 @@ $(document).ready(function() {
     // DataTable
     const table = $('#autoTable').DataTable({
         bAutoWidth: false,
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'print'
+        ],
         // bPaginate: false,
         select: {
             style:    'multi',
