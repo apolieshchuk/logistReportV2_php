@@ -195,3 +195,8 @@ window.onload = function() {
     // change autoTable vision
     // document.getElementById("autoTable").style.display = 'block';
 };
+
+// InputMasks
+window.onload = function() {
+    $('#modalUpdate-auto_num-input').inputmask({"mask": "AA 99-99 AA"});
+};

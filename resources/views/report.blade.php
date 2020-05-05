@@ -264,6 +264,8 @@
 {{--SEMANTIC--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
 
+{{--INPUT MASK--}}
+<script src="https://rawgit.com/RobinHerbots/jquery.inputmask/3.x/dist/jquery.inputmask.bundle.js"></script>
 
 {{--HANDLE FORM ERRORS (AFTER JS INCLUDE)--}}
 @if($errors->any())
