@@ -78,18 +78,18 @@
             </tr>
             <tr>
                 <th></th>
-                <th>Дата</th>
-                <th>Менеджер</th>
-                <th>Вантаж</th>
-                <th>Маршрут</th>
-                <th>Перевізник</th>
-                <th>#Авт</th>
-                <th>Водій</th>
-                <th>Ф2</th>
-                <th>Ф1</th>
-                <th>Тр</th>
-                <th>Замітки</th>
-                <th>Дії</th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
             </tr>
             </thead>
             <tfoot>
