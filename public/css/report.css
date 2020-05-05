@@ -74,37 +74,80 @@ table tr th:first-child, th:first-child input {
     width: 5px;
 }
 
-table tr th:nth-child(2), th:nth-child(2) input,
-table tr th:nth-child(3), th:nth-child(3) input {
-    width: 80px;
+/*table tr th:nth-child(2), th:nth-child(2) input,*/
+/*table tr th:nth-child(3), th:nth-child(3) input {*/
+/*    width: 60px;*/
+/*}*/
+
+/*table tr th:nth-child(4), th:nth-child(4) input {*/
+/*    width: 70px;*/
+/*}*/
+
+/*table tr th:nth-child(5), th:nth-child(5) input {*/
+/*    width: 150px;*/
+/*}*/
+
+/*table tr th:nth-child(6), th:nth-child(6) input {*/
+/*    width: 150px;*/
+/*}*/
+
+/*table tr th:nth-child(7), th:nth-child(7) input,*/
+/*table tr th:nth-child(8), th:nth-child(8) input{*/
+/*    width: 90px;*/
+/*}*/
+
+/*table tr th:nth-child(9), th:nth-child(9) input {*/
+/*    width: 30px;*/
+/*}*/
+
+/* date */
+table tr th:nth-child(2), th:nth-child(2) input {
+    width: 60px;
+    min-width: 60px;
 }
 
+/* cargo */
 table tr th:nth-child(4), th:nth-child(4) input {
-    width: 70px;
+    width: 30px;
+    min-width: 30px;
 }
 
+/* route */
 table tr th:nth-child(5), th:nth-child(5) input {
-    width: 150px;
+    width: 170px;
+    min-width: 170px;
 }
 
+/* carrier */
 table tr th:nth-child(6), th:nth-child(6) input {
-    width: 150px;
+    width: 140px;
+    min-width: 140px;
 }
 
-table tr th:nth-child(7), th:nth-child(7) input,
-table tr th:nth-child(8), th:nth-child(8) input{
-    width: 90px;
+/*auto num*/
+table tr th:nth-child(7), th:nth-child(7) input {
+    width: 75px;
+    min-width: 75px;
 }
 
-table tr th:nth-child(9), th:nth-child(9) input {
+/*driver*/
+table tr th:nth-child(8), th:nth-child(8) input {
+    width: 70px;
+    min-width: 70px;
+}
+
+/*f2 f1*/
+table tr th:nth-child(9), th:nth-child(9) input,
+table tr th:nth-child(10), th:nth-child(10) input{
     width: 30px;
 }
 
-table tr th:nth-child(10), th:nth-child(10) input,
-table tr th:nth-child(11), th:nth-child(11) input,
-table tr th:nth-child(12), th:nth-child(12) input{
-    width: 30px;
+/*tr*/
+table tr th:nth-child(11), th:nth-child(11) input {
+    width: 20px;
 }
+
+
 
 /* actions */
 th:nth-child(13), th:nth-child(13) input {
@@ -189,13 +232,9 @@ input[type="text"]:focus {
     table tr td {
         padding: 6px 3px !important;
     }
-
-    table tr th:nth-child(7), th:nth-child(7) input {
-        width: 70px;
-    }
 }
 
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1030px) {
 
     form button span {
         display: none;

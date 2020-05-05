@@ -10,21 +10,6 @@ tfoot input {
     box-sizing: border-box;
 }
 
-
-/*.dimmed.dimmable > .ui.animating.dimmer, .dimmed.dimmable > .ui.visible.dimmer, .ui.active.dimmer {*/
-/*    display: flex;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*}*/
-/*.ui.modal,*/
-/*.ui.active.modal {*/
-    /*margin: 0 auto!important;*/
-    /*top: 5% !important;*/
-    /*left: 30% !important;*/
-    /*transform-origin: center !important;*/
-    /*transition: all ease .5s;*/
-/*}*/
-
 #filterbox {
     width: 500px;
 }
@@ -91,16 +76,19 @@ thead tr th {
 /*#*/
 th:first-child, th:first-child input {
     width: 5px;
+    min-width: 5px;
 }
 
 /*carrier*/
 th:nth-child(2), th:nth-child(2) input {
-    width: 180px;
+    width: 150px;
+    min-width: 150px;
 }
 
 /*mark*/
 th:nth-child(3), th:nth-child(3) input {
-    width: 70px;
+    width: 60px;
+    min-width: 60px;
 }
 
 /*auto_num, trail_num, surname, name*/
@@ -109,12 +97,14 @@ th:nth-child(5), th:nth-child(5) input,
 th:nth-child(6), th:nth-child(6) input,
 th:nth-child(7), th:nth-child(7) input {
     width: 90px;
+    min-width: 75px;
 }
 
 /*father, tel*/
-th:nth-child(8), th:nth-child(8) input,
-th:nth-child(9), th:nth-child(9) input {
-    width: 110px;
+th:nth-child(8), th:nth-child(8) tr,
+th:nth-child(9), th:nth-child(9) tr {
+    width: 100px;
+    min-width: 85px;
 }
 
 /*license*/
@@ -161,4 +151,5 @@ table.dataTable thead th {
     table tr td {
         padding: 6px !important;
     }
+
 }
