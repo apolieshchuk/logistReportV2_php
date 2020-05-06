@@ -146,6 +146,7 @@ function sendReport() {
             alert("Помилка при додаванні авто на маршрут\n" + err.message)
         },
     })
+
 }
 
 function copyToClipboard(text) {
