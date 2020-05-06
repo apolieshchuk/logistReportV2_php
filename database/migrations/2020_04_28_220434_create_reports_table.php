@@ -27,7 +27,7 @@ class CreateReportsTable extends Migration
 
             $table->unsignedInteger('f2');
             $table->unsignedInteger('f1');
-            $table->boolean('tr');
+            $table->boolean('tr')->default(0);
             $table->string('notes')->nullable();
             $table->timestamps();
 

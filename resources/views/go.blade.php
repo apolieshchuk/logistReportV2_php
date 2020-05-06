@@ -116,8 +116,8 @@
                         <input class="data-col data-col-f1" style="padding-right: 5px;padding-left: 5px" type="number" value="0">
                     </div>
                 </td>
-                <td class="data-col data-col-tr"  data-label="Тр">
-                    <select class="ui search dropdown">
+                <td class="data-col-tr"  data-label="Тр">
+                    <select class="ui search dropdown data-col">
                         <option value="0">НІ</option>
                         <option value="1">ТАК</option>
                     </select>

@@ -121,7 +121,6 @@ $(document).ready(function() {
             {data: 'route.name'},
             {data: 'carrier.name'},
             {data: 'auto_num'},
-            // {data: 'trail_num'},
             {data: 'driver.surname'},
             {data: 'f2'},
             {data: 'f1'},
@@ -147,7 +146,7 @@ $(document).ready(function() {
             },
             { targets : [10],
                 render : function (data, type, row) {
-                    return data === '1' ? 'так' : 'ні'
+                    return data === 1 ? 'так' : 'ні'
                 }
             }
         ],

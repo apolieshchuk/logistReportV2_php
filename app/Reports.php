@@ -17,7 +17,9 @@ class Reports extends Model
         'driver_id',
         'f2',
         'f1',
-        'tr'];
+        'tr',
+        'notes'
+    ];
 
     public function manager() {
         return $this->belongsTo(Contacts::class, 'manager_id', 'id');

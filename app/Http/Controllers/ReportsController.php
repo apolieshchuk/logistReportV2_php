@@ -94,7 +94,6 @@ class ReportsController extends Controller
     }
 
     public function update(Reports $report) {
-
         try {
             $validator = $this->checkValid(request()->input());
 
@@ -120,7 +119,7 @@ class ReportsController extends Controller
                 'f2' => request('f2'),
                 'f1' => request('f1'),
                 'tr' => request('tr'),
-                'notes' => request('notes'),
+                'notes' => 'Hello world',
             ]);
 
             // update

@@ -75,11 +75,20 @@ function sendReport() {
         const row = $(this);
         const cols = row.find('.data-col');
         $(cols).each(function(i) {
-            const $dataCol = $(this).is('input') ? $(this).val() : $(this).text();
+            let $dataCol;
+            if ($(this).is('input')) {
+                $dataCol = $(this).val();
+            } else if ($(this).is('div')) { // for select TR ui dropdown semantic
+                $dataCol = $(this).find('div:first-child').text();
+            } else {
+                $dataCol = $(this).text();
+            }
             rowData.push($dataCol);
         });
         autos.push(rowData)
     });
+
+    // console.log(autos);
 
     // pack request post data
     const data = [];

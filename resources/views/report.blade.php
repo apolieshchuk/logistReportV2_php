@@ -141,7 +141,6 @@
                             <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
                         @endforeach
                     </select>
-{{--                    <input type="text" placeholder="Маршрут">--}}
                 </div>
             </div>
             <div class="two fields">
@@ -175,7 +174,6 @@
                             <option value="{{ $carrier['id'] }}">{{ $carrier['name'] }}</option>
                         @endforeach
                     </select>
-{{--                    <input type="text" placeholder="Перевізник">--}}
                 </div>
                 <div class="four wide field">
                     <input name='auto_num' id="modalUpdate-auto_num-input" type="text" placeholder="Гос№ авто">
@@ -187,7 +185,6 @@
                             <option value="{{ $driver['id'] }}">{{ $driver['surname']." ".$driver['name'] }}</option>
                         @endforeach
                     </select>
-{{--                    <input type="text" placeholder="Прізвище">--}}
                 </div>
             </div>
         </div>
