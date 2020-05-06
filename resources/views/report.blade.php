@@ -198,7 +198,7 @@
                     <input id="modalUpdate-f1-input" name='f1' type="number" placeholder="Ф1">
                 </div>
                 <div id="tr-select-wrapper" class="four wide field">
-                    <select id="modalUpdate-tr-select" name='tr' class="ui search dropdown">
+                    <select id="modalUpdate-tr-select" name='tr' class="ui dropdown">
                         <option value="0">НІ</option>
                         <option value="1">ТАК</option>
                     </select>

@@ -117,7 +117,7 @@
                     </div>
                 </td>
                 <td class="data-col-tr"  data-label="Тр">
-                    <select class="ui search dropdown data-col">
+                    <select class="ui dropdown data-col">
                         <option value="0">НІ</option>
                         <option value="1">ТАК</option>
                     </select>

@@ -2,6 +2,10 @@ body{
     height: auto !important;
     background-color: #f8fafc !important;
 }
+
+tbody {
+    padding-bottom: 80px;
+}
 input {
     width: 100%;
 }
@@ -27,7 +31,7 @@ input[type='date'] {
     box-shadow: 0 0 10px #9ecaed !important;
 }
 
-.data-col-tr .search {
+.data-col-tr .dropdown {
     min-width: 100px !important;
     max-width: 100px !important;
 }

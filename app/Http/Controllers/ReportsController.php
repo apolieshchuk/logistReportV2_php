@@ -119,7 +119,7 @@ class ReportsController extends Controller
                 'f2' => request('f2'),
                 'f1' => request('f1'),
                 'tr' => request('tr'),
-                'notes' => 'Hello world',
+                'notes' => request('notes'),
             ]);
 
             // update

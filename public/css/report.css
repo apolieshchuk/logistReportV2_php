@@ -35,7 +35,7 @@ thead tr th:last-child input{
     display: none;
 }
 
-#tr-select-wrapper .search{
+#tr-select-wrapper .dropdown{
     width: 100px;
     max-width: 100px;
     min-width: 100px;
