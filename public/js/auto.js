@@ -1,4 +1,6 @@
-// TODO do ajax request on update route for redraw only
+// TODO do ajax request on update route for redraw only +++
+
+const ROW_ID = 'rowId_'
 
 // MODALS
 function showModalAdd() {
@@ -81,25 +83,6 @@ function showModalDelete(id) {
     $('.ui.basic.modal')
         .modal('show')
     ;
-}
-
-// todo universe function for show modals
-function showModal(modal) {
-    $(modal).modal({
-        autofocus:false,
-        onHide: function () {
-            addCarrierSelect(this);
-            document.getElementById("modalAdd_form").reset();
-        },
-        onShow: function () {
-            // dropdown
-            $('.ui.dropdown').dropdown({
-                fullTextSearch: true,
-                // showOnFocus: false
-                // selectOnBlur: false,
-            });
-        }
-    }).modal('show');
 }
 
 // add new carrier
@@ -262,17 +245,28 @@ $(document).ready(function() {
                     `</a> </div>`
                     }
             },
+            {data: 'id'},
         ],
-        columnDefs: [ {
-            orderable: false,
-            className: 'select-checkbox',
-            targets:   0
-        } ],
+        columnDefs: [
+            {
+                orderable: false,
+                className: 'select-checkbox',
+                targets:   0
+            },
+            {
+                targets: 11,
+                visible: false,
+            }
+        ],
+        // // Set rows IDs
+        rowId: function(auto) {
+            return ROW_ID + auto.id;
+        },
         select: {
             style:    'multi',
             selector: 'td:not(:last-child)'
         },
-        order: [[ 1, 'asc' ]],
+        order: [[ 11, 'desc' ]], // sort by id
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
@@ -291,7 +285,7 @@ $(document).ready(function() {
     });
 
     // filters under columns
-    $( '#autoTable thead'  ).on( 'keyup', ".column_search",function () {
+    $('#autoTable thead').on( 'keyup', ".column_search",function () {
         table
             .column( $(this).parent().index() )
             .search( this.value )
@@ -329,5 +323,61 @@ window.onload = function() {
 // InputMasks
 window.onload = function() {
     // input masks
-    $('#modalAddRoute-name').inputmask({"mask": "Посв AAA № 999999"});
+    $('#modalUpdate-license-input, #modalAdd-license-input').inputmask({"mask": "Посв AAA № 999999"});
+    $('#modalUpdate-auto-num-input, #modalUpdate-trail-num-input').inputmask({"mask": "AA 99-99 AA"});
+    $('#modalAdd-auto-num-input, #modalAdd-trail-num-input').inputmask({"mask": "AA 99-99 AA"});
+    $('#modalUpdate-tel-input, #modalAdd-tel-input').inputmask({"mask": "099-99-99-999"});
 };
+
+// update auto SPA update
+$('#modalUpdate_form').submit(function(event) {
+    event.preventDefault();
+
+    // ajax request for update data in server db
+    $.ajax({
+        url: $('#modalUpdate_form').attr('action'),
+        method: 'PUT',
+        data: $('#modalUpdate_form').serialize(),
+        // contentType: 'application/json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        },
+        success: function (res) {
+            // redraw data in table
+            const table = $('#autoTable').DataTable();
+
+            $resData = JSON.parse(res)['data'];
+
+            table.row('#'+ROW_ID+$resData.id).data($resData).draw();
+
+            // hide modal
+            $('#modalUpdate').modal('hide');
+        }
+    })
+});
+
+// delete auto SPA delete
+$('#modalDelete_form').submit(function(event) {
+    event.preventDefault();
+
+    // ajax request for delete data in server db
+    $.ajax({
+        url: $('#modalDelete_form').attr('action'),
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        },
+        success: function (res) {
+            $resData = JSON.parse(res);
+
+            // remove data in table
+            const table = $('#autoTable').DataTable();
+
+            table.row('#'+ROW_ID+$resData.id).remove().draw();
+
+            // hide modal
+            $('#modalDelete').modal('hide');
+        }
+    })
+});
+

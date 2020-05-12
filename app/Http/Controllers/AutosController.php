@@ -57,7 +57,7 @@ class AutosController extends Controller
     }
 
     public function update(Autos $auto) {
-
+//        return 'hello';
         try {
             $validator = $this->checkValid(request()->input());
 
@@ -83,7 +83,13 @@ class AutosController extends Controller
             // update
             $auto->touch();
 
-            return back();
+            // DONT CHANGE OBJECT. USING IN JS
+            $data = Autos::with([
+                'carrier:id,name',
+                'driver:id,surname,name,father,tel,license'
+            ])->find($auto->id);
+
+            return json_encode(['data' => $data]);
 
         } catch (\Exception $e) {
             return back()
@@ -97,8 +103,9 @@ class AutosController extends Controller
     }
 
     public function destroy(Autos $auto) {
+        $id = $auto->id;
         $auto->delete();
-        return back();
+        return json_encode(['status' => 'ok', 'id' => $id]);
     }
 
     /**
@@ -132,7 +139,6 @@ class AutosController extends Controller
     private function findOrCreateDriver () {
 
         // check or create driver
-        print_r(request('tel'));
         $driver = Contacts::firstOrCreate([
             'surname' => request('dr_surn'),
             'name' => request('dr_name'),
