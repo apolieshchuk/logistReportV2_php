@@ -31,13 +31,21 @@
     {{--SELECT PICKERS--}}
     <div id="#selectPickers" style="display:flex; flex-direction: column; margin: 10px;">
 {{--        ROUTE PICKER--}}
-        <div id="route-select-wrapper" style="margin-bottom: 10px;">
+        <div id="route-select-wrapper" style="margin-bottom: 10px; position: relative">
             <select id="routeSelect" class="ui search dropdown" onchange="initRatio()">
                 <option value="" selected disabled>Оберіть маршрут</option>
                 @foreach($routes as $route)
-                    <option value="{{ $route['id'] }}">{{ $route['name'] }}</option>
+                    <option value="{{ $route['id'] }}"
+                    @if(session('route_id') == $route['id'])
+                        {{ 'selected' }}
+                    @endif
+                    >{{ $route['name'] }}</option>
                 @endforeach
             </select>
+            <i class="plus square icon"
+               onclick="showModalAdd()"
+               style="font-size:36px; color:#2185d0;
+               cursor: pointer; position: absolute; top: 10px"></i>
         </div>
 {{--        INFO PICKER--}}
         <div id="infoPicker" style="text-align: center; margin-bottom: 10px">
@@ -70,9 +78,11 @@
     <button
         onclick="sendReport()"
         style="align-self: center" class="ui blue button" id="goButton1"
-    >Відправити</button>
-</div>
+    >Відправити
+        <i class="angle double right icon" style="font-size: 22px"></i>
+    </button>
 
+</div>
 
 <hr style="margin-bottom: 20px;">
 
@@ -130,6 +140,8 @@
     </table>
 </div>
 
+{{--MODAL--}}
+@include('modals.addRoute');
 
 @endsection
 
@@ -148,5 +160,8 @@
 {{--SEMANTIC--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.9/semantic.min.js"></script>
 
+{{--    SHOW MODALS--}}
+@if($errors->any())
+    <script> showModalAdd() </script>
+@endif
 @endsection
-

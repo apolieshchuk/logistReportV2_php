@@ -14,48 +14,43 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','AutosController@index')
-    ->name('auto.index')->middleware('auth');
+Route::middleware('auth')->group(function () {
 
-Route::post('/','AutosController@store')
-    ->name('auto.store')->middleware('auth');
+    Route::get('/','AutosController@index')->name('auto.index');
 
-Route::get('/autos/data-load','AutosController@dataLoad')
-    ->name('auto.dataLoad')->middleware('auth');
+    Route::post('/','AutosController@store')->name('auto.store');
 
-Route::get('/autos/{auto}','AutosController@show')
-    ->name('auto.show')->middleware('auth');
+    Route::get('/autos/data-load','AutosController@dataLoad')->name('auto.dataLoad');
 
-Route::put('/autos/{auto}','AutosController@update')
-    ->name('auto.update')->middleware('auth');
+    Route::get('/autos/{auto}','AutosController@show')->name('auto.show');
 
-Route::delete('/autos/{auto}','AutosController@destroy')
-    ->name('auto.destroy')->middleware('auth');
+    Route::put('/autos/{auto}','AutosController@update')->name('auto.update');
 
-Route::get('/go','GoController@index')
-    ->name('go.index')->middleware('auth');
+    Route::delete('/autos/{auto}','AutosController@destroy')->name('auto.destroy');
 
-Route::get('/report','ReportsController@index')
-    ->name('report.index')->middleware('auth');
+    Route::get('/go','GoController@index')->name('go.index');
 
-Route::get('/report/data-load','ReportsController@dataLoad')
-    ->name('report.dataLoad')->middleware('auth');
+    Route::post('/go', 'GoController@store')->name('go.store');
 
-Route::post('/report','ReportsController@store')
-    ->name('report.store')->middleware('auth');
+    Route::prefix('report')->group(function(){
 
-Route::get('/report/ratio','ReportsController@ratio')
-    ->name('report.ratio')->middleware('auth');
+        Route::get('data-load','ReportsController@dataLoad')->name('report.dataLoad');
 
-Route::delete('/report/{report}','ReportsController@destroy')
-    ->name('report.destroy')->middleware('auth');
+        Route::get('ratio','ReportsController@ratio')->name('report.ratio');
 
-Route::get('/report/{report}','ReportsController@show')
-    ->name('report.show')->middleware('auth');
+    });
 
-Route::put('/report/{report}','ReportsController@update')
-    ->name('report.update')->middleware('auth');
+    Route::get('report','ReportsController@index')->name('report.index');
 
+    Route::post('report','ReportsController@store')->name('report.store');
+
+    Route::delete('report/{report}','ReportsController@destroy')->name('report.destroy');
+
+    Route::put('report/{report}','ReportsController@update')->name('report.update');
+
+    Route::get('report/{report}','ReportsController@show')->name('report.show');
+
+});
 
 Auth::routes(['register' => false]);
 

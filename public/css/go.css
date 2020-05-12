@@ -19,9 +19,15 @@ input[type='date'] {
     display: none;
 }
 
+/*MODAL*/
+#modalAddRoute {
+    top: 40%;
+    left: 65%;
+}
+
 /*SELECT ROUTE BUTTON*/
 #route-select-wrapper .search:first-child {
-    width: 395px;
+    width: 355px;
 }
 
 #route-select-wrapper input.search {

@@ -1,3 +1,13 @@
+// MODALS
+function showModalAdd() {
+    $('#modalAddRoute').modal({
+        onHide: function () {
+            $('.modal-error-box').hide();
+            document.getElementById("modalAddRoute_form").reset();
+        },
+    }).modal('show');
+}
+
 window.onload = function(){
     $('.ui.dropdown').dropdown({
         fullTextSearch: true,
@@ -157,3 +167,4 @@ function copyToClipboard(text) {
     document.execCommand('copy');
     document.body.removeChild(el);
 }
+

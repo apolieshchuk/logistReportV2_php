@@ -23,4 +23,20 @@ class GoController extends Controller
             'cargos' => Cargos::orderBy('updated_at', 'desc')->orderBy('name', 'asc')->get()
         ]);
     }
+
+    public function store(Request $request) {
+        $request->validate([
+            'from' => 'required',
+            'to' => 'required',
+            'km' => 'required|numeric'
+        ]);
+
+        $route = Routes::firstOrCreate([
+            'name' => $request->from.'-'.$request->to,
+        ]);
+        $route->km = $request->km;
+        $route->save();
+
+        return back()->with('route_id', $route->id);
+    }
 }
