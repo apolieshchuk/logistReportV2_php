@@ -168,7 +168,7 @@ class AutosController extends Controller
         $autos = Autos::with([
             'carrier:id,name',
             'driver:id,surname,name,father,tel,license'
-        ])->get();
+        ])->orderBy('id','desc')->get();
 
         return json_encode(['data' => $autos]);
     }

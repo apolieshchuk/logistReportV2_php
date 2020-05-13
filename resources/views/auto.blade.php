@@ -82,7 +82,7 @@
                     <th>Тел</th>
                     <th>Посвідчення</th>
                     <th>Дії</th>
-                    <th>id</th>
+{{--                    <th>id</th>--}}
                 </tr>
                 <tr id="filter-col">
                     <th></th>
@@ -96,7 +96,7 @@
                     <th></th>
                     <th></th>
                     <th></th>
-                    <th>id</th>
+{{--                    <th>id</th>--}}
                 </tr>
                 </thead>
                 <tfoot>
@@ -112,7 +112,7 @@
                     <th>Тел</th>
                     <th>Посвідчення</th>
                     <th>Дії</th>
-                    <th>id</th>
+{{--                    <th>id</th>--}}
                 </tr>
                 </tfoot>
             </table>

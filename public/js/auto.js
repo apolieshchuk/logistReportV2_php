@@ -245,7 +245,7 @@ $(document).ready(function() {
                     `</a> </div>`
                     }
             },
-            {data: 'id'},
+            // {data: 'id'},
         ],
         columnDefs: [
             {
@@ -253,10 +253,10 @@ $(document).ready(function() {
                 className: 'select-checkbox',
                 targets:   0
             },
-            {
-                targets: 11,
-                visible: false,
-            }
+            // {
+            //     targets: 11,
+            //     visible: false,
+            // }
         ],
         // // Set rows IDs
         rowId: function(auto) {
@@ -266,7 +266,7 @@ $(document).ready(function() {
             style:    'multi',
             selector: 'td:not(:last-child)'
         },
-        order: [[ 11, 'desc' ]], // sort by id todo mb from eloquent?
+        // order: [[ 11, 'desc' ]], // sort by id todo mb from eloquent?
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
