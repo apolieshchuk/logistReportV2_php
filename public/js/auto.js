@@ -266,7 +266,7 @@ $(document).ready(function() {
             style:    'multi',
             selector: 'td:not(:last-child)'
         },
-        order: [[ 11, 'desc' ]], // sort by id
+        order: [[ 11, 'desc' ]], // sort by id todo mb from eloquent?
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,

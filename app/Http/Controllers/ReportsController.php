@@ -85,8 +85,9 @@ class ReportsController extends Controller
     }
 
     public function destroy(Reports $report) {
+        $id = $report->id;
         $report->delete();
-        return back();
+        return json_encode(['status' => 'ok', 'id' => $id]);
     }
 
     public function show(Reports $report) {
@@ -125,7 +126,15 @@ class ReportsController extends Controller
             // update
             $report->touch();
 
-            return back();
+            $data = Reports::with([
+                    'manager:id,surname',
+                    'cargo:id,name',
+                    'route:id,name',
+                    'carrier:id,name',
+                    'driver:id,surname'
+                ])->find($report->id);
+
+            return json_encode(['data' => $data]);
 
         } catch (\Exception $e) {
             return back()

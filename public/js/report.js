@@ -1,4 +1,5 @@
 // TODO do ajax request on update route for redraw only
+const ROW_ID = 'rowId_'
 
 // MODALS
 function showModalDelete(id) {
@@ -109,6 +110,10 @@ $(document).ready(function() {
             selector: 'td:not(:last-child)'
         },
         // order: [[ 1, 'desc' ]],
+        // // Set rows IDs
+        rowId: function(auto) {
+            return ROW_ID + auto.id;
+        },
         orderCellsTop: true,
         fixedHeader: true,
         pageLength: 10,
@@ -199,3 +204,55 @@ window.onload = function() {
 window.onload = function() {
     $('#modalUpdate-auto_num-input').inputmask({"mask": "AA 99-99 AA"});
 };
+
+// update report SPA update
+$('#modalUpdate_form').submit(function(event) {
+    event.preventDefault();
+
+    // ajax request for update data in server db
+    $.ajax({
+        url: $('#modalUpdate_form').attr('action'),
+        method: 'PUT',
+        data: $('#modalUpdate_form').serialize(),
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        },
+        success: function (res) {
+
+            // redraw data in table
+            const table = $('#autoTable').DataTable();
+
+            $resData = JSON.parse(res)['data'];
+
+            table.row('#'+ROW_ID+$resData.id).data($resData).draw();
+
+            // hide modal
+            $('#modalUpdate').modal('hide');
+        }
+    })
+});
+
+// delete auto SPA delete
+$('#modalDelete_form').submit(function(event) {
+    event.preventDefault();
+
+    // ajax request for delete data in server db
+    $.ajax({
+        url: $('#modalDelete_form').attr('action'),
+        method: 'DELETE',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content'),
+        },
+        success: function (res) {
+            $resData = JSON.parse(res);
+
+            // remove data in table
+            const table = $('#autoTable').DataTable();
+
+            table.row('#'+ROW_ID+$resData.id).remove().draw();
+
+            // hide modal
+            $('#modalDelete').modal('hide');
+        }
+    })
+});
