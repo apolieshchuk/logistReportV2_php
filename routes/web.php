@@ -50,6 +50,8 @@ Route::middleware('auth')->group(function () {
 
     Route::get('report/{report}','ReportsController@show')->name('report.show');
 
+    Route::get('bills','BillsController@index')->name('bills.index');
+
 });
 
 Auth::routes(['register' => false]);

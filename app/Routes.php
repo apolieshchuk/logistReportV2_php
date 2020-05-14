@@ -12,4 +12,8 @@ class Routes extends Model
     public function reports() {
         return $this->hasMany(Reports::class);
     }
+
+    public function bills() {
+        return $this->hasMany(Bills::class);
+    }
 }
